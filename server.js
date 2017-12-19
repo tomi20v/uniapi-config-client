@@ -10,12 +10,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 //The dist folder has our static resources (index.html, css, images)
-app.use(express.static(__dirname + '/dist')); 
+app.use('/config/client/', express.static(__dirname + '/dist'));
 
 app.get('/api/customers/page/:skip/:top', (req, res) => {
     const topVal = req.params.top,
           skipVal = req.params.skip,
-          skip = (isNaN(skipVal)) ? 0 : +skipVal;  
+          skip = (isNaN(skipVal)) ? 0 : +skipVal;
     let top = (isNaN(topVal)) ? 10 : skip + (+topVal);
 
     if (top > customers.length) {
@@ -41,7 +41,7 @@ app.get('/api/customers/:id', (req, res) => {
            selectedCustomer = customer;
            break;
         }
-    }  
+    }
     res.json(selectedCustomer);
 });
 
@@ -59,7 +59,7 @@ app.put('/api/customers/:id', (req, res) => {
     let id = +req.params.id;
     let status = false;
 
-    //Ensure state name is in sync with state abbreviation 
+    //Ensure state name is in sync with state abbreviation
     const filteredStates = states.filter((state) => state.abbreviation === putCustomer.state.abbreviation);
     if (filteredStates && filteredStates.length) {
         putCustomer.state.name = filteredStates[0].name;
@@ -83,7 +83,7 @@ app.delete('/api/customers/:id', function(req, res) {
            customers.splice(i,1);
            break;
         }
-    }  
+    }
     res.json({ status: true });
 });
 

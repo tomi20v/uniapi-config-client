@@ -1,6 +1,6 @@
 {
-  "name": "uniapi config client",
-  "version": "0.0.1",
+  "name": "uniapi-config-client",
+  "version": "0.0.2",
   "license": "WTFPL",
   "scripts": {
     "ng": "ng",
