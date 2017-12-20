@@ -1,6 +1,11 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes } from '@angular/router';
 
+export interface IEntity {
+    _id: string,
+    name: string
+}
+
 export interface ICustomer {
     id: number;
     firstName: string;

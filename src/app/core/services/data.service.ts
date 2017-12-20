@@ -4,17 +4,22 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { map, catchError } from 'rxjs/operators';
 
-import { ICustomer, IOrder, IState, IPagedResults, IApiResponse } from '../../shared/interfaces';
+import {ICustomer, IOrder, IState, IPagedResults, IApiResponse, IEntity} from '../../shared/interfaces';
 
 @Injectable()
 export class DataService {
 
+    entityBaseUrl: string = '/config/entity';
     customersBaseUrl: string = '/api/customers';
     ordersBaseUrl: string = '/api/orders';
     orders: IOrder[];
     states: IState[];
 
     constructor(private http: HttpClient) { }
+
+    getEntities(): Observable<IEntity[]> {
+        return this.http.get<IEntity[]>(this.entityBaseUrl);
+    }
 
     getCustomersPage(page: number, pageSize: number): Observable<IPagedResults<ICustomer[]>> {
         return this.http.get<ICustomer[]>(
@@ -33,7 +38,7 @@ export class DataService {
                 catchError(this.handleError)
             );
     }
-    
+
     getCustomers(): Observable<ICustomer[]> {
         return this.http.get<ICustomer[]>(this.customersBaseUrl)
             .pipe(
@@ -110,7 +115,7 @@ export class DataService {
 
     //Would need following import added:
     //import { Observer } from 'rxjs/Observer';
-    
+
     // createObservable(data: any): Observable<any> {
     //     return Observable.create((observer: Observer<any>) => {
     //         observer.next(data);

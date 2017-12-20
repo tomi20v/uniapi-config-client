@@ -1,16 +1,33 @@
-"use strict";
+'use strict';
 var express     = require('express'),
     bodyParser  = require('body-parser'),
     fs          = require('fs'),
     app         = express(),
     customers   = JSON.parse(fs.readFileSync('data/customers.json', 'utf-8')),
-    states      = JSON.parse(fs.readFileSync('data/states.json', 'utf-8'));
+    states      = JSON.parse(fs.readFileSync('data/states.json', 'utf-8')),
+    entities    = JSON.parse(fs.readFileSync('data/entities.json', 'utf-8'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-//The dist folder has our static resources (index.html, css, images)
+// The dist folder has our static resources (index.html, css, images)
 app.use('/config/client/', express.static(__dirname + '/dist'));
+
+app.get('/config/entity', (req, res) => {
+    res.json(entities);
+});
+
+app.get('/config/entity/:id', (req, res) => {
+    const id = req.params.id;
+    let ret = null;
+    for (const entity of entities) {
+        if (entity._id === id) {
+            ret = entity;
+            break;
+        }
+    }
+    res.json(ret);
+});
 
 app.get('/api/customers/page/:skip/:top', (req, res) => {
     const topVal = req.params.top,
@@ -34,7 +51,7 @@ app.get('/api/customers', (req, res) => {
 });
 
 app.get('/api/customers/:id', (req, res) => {
-    let customerId = +req.params.id;
+    let customerId = req.params.id;
     let selectedCustomer = {};
     for (let customer of customers) {
         if (customer.id === customerId) {
@@ -120,7 +137,7 @@ app.listen(3000);
 
 console.log('Express listening on port 3000.');
 
-//Open browser
+// Open browser
 var opn = require('opn');
 
 opn('http://localhost:3000').then(() => {

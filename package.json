@@ -1,10 +1,10 @@
 {
   "name": "uniapi-config-client",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "WTFPL",
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
+    "start": "node server.ts",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

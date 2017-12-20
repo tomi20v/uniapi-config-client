@@ -16,6 +16,10 @@ var map = {
 		"../../../../../src/app/customers/customers.module.ts",
 		"customers.module"
 	],
+	"app/entities/entities.module": [
+		"../../../../../src/app/entities/entities.module.ts",
+		"entities.module"
+	],
 	"app/orders/orders.module": [
 		"../../../../../src/app/orders/orders.module.ts",
 		"orders.module"
@@ -54,11 +58,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 var app_routes = [
     { path: '', pathMatch: 'full', redirectTo: '/customers' },
+    // { path: 'entity/:id', loadChildren: 'app/entity/entity.module#EntityModule' },
+    { path: 'entities', loadChildren: 'app/entities/entities.module#EntitiesModule' },
     { path: 'customers/:id', loadChildren: 'app/customer/customer.module#CustomerModule' },
     { path: 'customers', loadChildren: 'app/customers/customers.module#CustomersModule' },
     { path: 'orders', loadChildren: 'app/orders/orders.module#OrdersModule' },
     { path: 'about', loadChildren: 'app/about/about.module#AboutModule' },
-    { path: '**', pathMatch: 'full', redirectTo: '/customers' } //catch any unfound routes and redirect to home page
+    { path: '**', pathMatch: 'full', redirectTo: '/customers' } // catch any unfound routes and redirect to home page
 ];
 var AppRoutingModule = (function () {
     function AppRoutingModule() {
@@ -719,7 +725,7 @@ var ModalService = (function () {
 /***/ "../../../../../src/app/core/navbar/navbar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-inner navbar-fixed-top\">\n    <div class=\"container\">\n        <div class=\"navbar-header\" style=\"\">\n            <button type=\"button\" class=\"navbar-toggle\" \n                    (click)=\"isCollapsed = !isCollapsed\">\n                <span class=\"sr-only\">Toggle navigation</span>\n                <span class=\"icon-bar\"></span>\n                <span class=\"icon-bar\"></span>\n                <span class=\"icon-bar\"></span>\n            </button>\n            <a class=\"navbar-brand\" routerLink=\"/customers\">\n                <img src=\"assets/images/people.png\" alt=\"logo\" />\n                <span class=\"app-title\">Customer Manager</span>\n            </a>\n            <span class=\"navbar-collapse\" [attr.data-collapse]=\"isCollapsed\">\n                <ul class=\"nav navbar-nav nav-pills navBarPadding\">\n                    <li routerLinkActive=\"active\"><a routerLink=\"/customers\">Customers</a></li>\n                    <li routerLinkActive=\"active\"><a routerLink=\"/orders\">Orders</a></li>\n                    <li routerLinkActive=\"active\"><a routerLink=\"/about\">About</a></li>\n                    <li routerLinkActive=\"active\" (click)=\"loginOrOut()\"><a>{{ loginLogoutText }}</a></li>\n                </ul>\n            </span>\n        </div>\n    </div>\n</nav>"
+module.exports = "<nav class=\"navbar navbar-inner navbar-fixed-top\">\n    <div class=\"container\">\n        <div class=\"navbar-header\" style=\"\">\n            <button type=\"button\" class=\"navbar-toggle\"\n                    (click)=\"isCollapsed = !isCollapsed\">\n                <span class=\"sr-only\">Toggle navigation</span>\n                <span class=\"icon-bar\"></span>\n                <span class=\"icon-bar\"></span>\n                <span class=\"icon-bar\"></span>\n            </button>\n            <a class=\"navbar-brand\" routerLink=\"/customers\">\n                <img src=\"assets/images/people.png\" alt=\"logo\" />\n                <span class=\"app-title\">Customer Manager</span>\n            </a>\n            <span class=\"navbar-collapse\" [attr.data-collapse]=\"isCollapsed\">\n                <ul class=\"nav navbar-nav nav-pills navBarPadding\">\n                    <li routerLinkActive=\"active\"><a routerLink=\"/entities\">Entities</a></li>\n                    <li routerLinkActive=\"active\"><a routerLink=\"/customers\">Customers</a></li>\n                    <li routerLinkActive=\"active\"><a routerLink=\"/orders\">Orders</a></li>\n                    <li routerLinkActive=\"active\"><a routerLink=\"/about\">About</a></li>\n                    <li routerLinkActive=\"active\" (click)=\"loginOrOut()\"><a>{{ loginLogoutText }}</a></li>\n                </ul>\n            </span>\n        </div>\n    </div>\n</nav>\n"
 
 /***/ }),
 
@@ -1128,9 +1134,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var DataService = (function () {
     function DataService(http) {
         this.http = http;
+        this.entityBaseUrl = '/config/entity';
         this.customersBaseUrl = '/api/customers';
         this.ordersBaseUrl = '/api/orders';
     }
+    DataService.prototype.getEntities = function () {
+        return this.http.get(this.entityBaseUrl);
+    };
     DataService.prototype.getCustomersPage = function (page, pageSize) {
         var _this = this;
         return this.http.get(this.customersBaseUrl + "/page/" + page + "/" + pageSize, { observe: 'response' })
@@ -1465,6 +1475,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var TrackByService = (function () {
     function TrackByService() {
     }
+    TrackByService.prototype.entity = function (index, entity) {
+        return entity._id;
+    };
     TrackByService.prototype.customer = function (index, customer) {
         return customer.id;
     };

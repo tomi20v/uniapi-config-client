@@ -1,0 +1,27 @@
+<div class="entities view indent">
+  <div class="container">
+    <header>
+      <h3>
+        <span class="glyphicon glyphicon-user"></span>
+        Entities
+      </h3>
+    </header>
+    <br />
+    <div class="row">
+      <div class="col-md-10">
+        <div class="navbar">
+          <ul class="nav navbar-nav">
+            <li class="toolbar-item">
+              <a routerLink="/entities/0/edit">
+                <span class="glyphicon glyphicon-plus"></span> New Entity
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <cm-entities-card [entities]="entities"></cm-entities-card>
+
+  </div>
+</div>
