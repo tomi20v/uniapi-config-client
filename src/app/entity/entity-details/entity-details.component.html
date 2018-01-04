@@ -1,0 +1,45 @@
+<div class="container" *ngIf="entity">
+  <div class="row">
+    <h4>{{ entity.name }}</h4>
+    <div class="col-md-5 app-content-left">
+      <div class="col-md-10">
+        <span style="float: right">created at</span>
+        <span class="glyphicon glyphicon-new-window"></span>
+        {{entity.crstamp}}
+        <span *ngIf="!entity.crstamp">---</span>
+      </div>
+      <br />
+      <div class="col-md-10">
+        <span style="float: right">last updated at</span>
+        <span class="glyphicon glyphicon-floppy-saved"></span>
+        {{entity.tstamp}}
+        <span *ngIf="!entity.tstamp">---</span>
+      </div>
+      <br />
+      <div class="col-md-10">
+        <span style="float: right">
+          plugins
+          <span class="glyphicon glyphicon-arrow-right"></span>
+        </span>
+        <span class="glyphicon glyphicon-list"></span>
+        <ul *ngIf="entity.plugins" else emptyBlock>
+          <li *ngFor="let plugin of entity.plugins">{{plugin.name}}</li>
+        </ul>
+        <span #emptyBlock>---</span>
+      </div>
+      <br />
+      <div class="col-md-10">
+        <span style="float: right">schema</span>
+        <span class="glyphicon glyphicon-list-alt"></span>
+        {{entity.schema}}
+        <span *ngIf="!entity.schema">---</span>
+      </div>
+    </div>
+    <div class="col-md-5 app-content-left">
+      <!--<entity-detail-inner [tab]="activeTab"></entity-detail-inner>-->
+    </div>
+  </div>
+</div>
+<div *ngIf="!entity" class="container">
+  No entity found
+</div>

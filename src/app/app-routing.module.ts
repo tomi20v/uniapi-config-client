@@ -5,7 +5,7 @@ import { PreloadModulesStrategy } from './core/strategies/preload-modules.strate
 
 const app_routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/customers' },
-  // { path: 'entity/:id', loadChildren: 'app/entity/entity.module#EntityModule' },
+  { path: 'entity/:id', loadChildren: 'app/entity/entity.module#EntityModule' },
   { path: 'entities', loadChildren: 'app/entities/entities.module#EntitiesModule' },
   { path: 'customers/:id', loadChildren: 'app/customer/customer.module#CustomerModule' },
   { path: 'customers', loadChildren: 'app/customers/customers.module#CustomersModule' },

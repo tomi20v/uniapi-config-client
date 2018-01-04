@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+.navbar.app-slim-navbar {
+    min-height: auto;
+    height: auto;
+    margin-bottom: 10px;
+}
+.app-content-left {
+    float: left;
+}

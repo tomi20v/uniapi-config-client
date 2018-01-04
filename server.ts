@@ -51,10 +51,10 @@ app.get('/api/customers', (req, res) => {
 });
 
 app.get('/api/customers/:id', (req, res) => {
-    let customerId = req.params.id;
+    const customerId = req.params.id;
     let selectedCustomer = {};
-    for (let customer of customers) {
-        if (customer.id === customerId) {
+    for (const customer of customers) {
+        if (customer.id == customerId) {
            selectedCustomer = customer;
            break;
         }
@@ -63,8 +63,8 @@ app.get('/api/customers/:id', (req, res) => {
 });
 
 app.post('/api/customers', (req, res) => {
-    let postedCustomer = req.body;
-    let maxId = Math.max.apply(Math,customers.map((cust) => cust.id));
+    const postedCustomer = req.body;
+    let maxId = Math.max.apply(Math, customers.map((cust) => cust.id));
     postedCustomer.id = ++maxId;
     postedCustomer.gender = (postedCustomer.id % 2 === 0) ? 'female' : 'male';
     customers.push(postedCustomer);
@@ -138,10 +138,10 @@ app.listen(3000);
 console.log('Express listening on port 3000.');
 
 // Open browser
-var opn = require('opn');
-
-opn('http://localhost:3000').then(() => {
-    console.log('Browser closed.');
-});
+// var opn = require('opn');
+//
+// opn('http://localhost:3000').then(() => {
+//     console.log('Browser closed.');
+// });
 
 

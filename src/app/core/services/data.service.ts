@@ -21,6 +21,10 @@ export class DataService {
         return this.http.get<IEntity[]>(this.entityBaseUrl);
     }
 
+    getEntity(id: string): Observable<IEntity> {
+      return this.http.get<IEntity>(this.entityBaseUrl + '/' + id);
+    }
+
     getCustomersPage(page: number, pageSize: number): Observable<IPagedResults<ICustomer[]>> {
         return this.http.get<ICustomer[]>(
             `${this.customersBaseUrl}/page/${page}/${pageSize}`,
