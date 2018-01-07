@@ -5,7 +5,8 @@ var express     = require('express'),
     app         = express(),
     customers   = JSON.parse(fs.readFileSync('data/customers.json', 'utf-8')),
     states      = JSON.parse(fs.readFileSync('data/states.json', 'utf-8')),
-    entities    = JSON.parse(fs.readFileSync('data/entities.json', 'utf-8'));
+    entities    = JSON.parse(fs.readFileSync('data/entities.json', 'utf-8')),
+    schemas     = JSON.parse(fs.readFileSync('data/schemas.json', 'utf-8'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -23,6 +24,26 @@ app.get('/config/entity/:id', (req, res) => {
     for (const entity of entities) {
         if (entity._id === id) {
             ret = entity;
+            break;
+        }
+    }
+    res.json(ret);
+});
+
+app.get('/config/schema', (req, res) => {
+    let ret = [];
+    schemas.forEach(function(each) {
+        ret.push(each.schema);
+    });
+    res.json(ret);
+});
+
+app.get('/config/schema/:id', (req, res) => {
+    const id = req.params.id;
+    let ret = null;
+    for (const schema of schemas) {
+        if (schema.$id === id) {
+            ret = schema;
             break;
         }
     }

@@ -3,14 +3,16 @@ import { NgModule } from '@angular/core';
 import {SharedModule} from '../shared/shared.module';
 
 import { EntityRoutingModule } from './entity-routing.module';
-import { EntityDetailsComponent } from './entity-details/entity-details.component';
 import { EntityComponent } from './entity.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   imports: [
     SharedModule,
-    EntityRoutingModule
+    EntityRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  declarations: [EntityComponent, EntityDetailsComponent]
+  declarations: [EntityComponent]
 })
 export class EntityModule { }

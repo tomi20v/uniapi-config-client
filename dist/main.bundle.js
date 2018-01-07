@@ -20,6 +20,10 @@ var map = {
 		"../../../../../src/app/entities/entities.module.ts",
 		"entities.module"
 	],
+	"app/entity/entity.module": [
+		"../../../../../src/app/entity/entity.module.ts",
+		"entity.module"
+	],
 	"app/orders/orders.module": [
 		"../../../../../src/app/orders/orders.module.ts",
 		"orders.module"
@@ -58,7 +62,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 var app_routes = [
     { path: '', pathMatch: 'full', redirectTo: '/customers' },
-    // { path: 'entity/:id', loadChildren: 'app/entity/entity.module#EntityModule' },
+    { path: 'entity/:id', loadChildren: 'app/entity/entity.module#EntityModule' },
     { path: 'entities', loadChildren: 'app/entities/entities.module#EntitiesModule' },
     { path: 'customers/:id', loadChildren: 'app/customer/customer.module#CustomerModule' },
     { path: 'customers', loadChildren: 'app/customers/customers.module#CustomersModule' },
@@ -1141,6 +1145,9 @@ var DataService = (function () {
     DataService.prototype.getEntities = function () {
         return this.http.get(this.entityBaseUrl);
     };
+    DataService.prototype.getEntity = function (id) {
+        return this.http.get(this.entityBaseUrl + '/' + id);
+    };
     DataService.prototype.getCustomersPage = function (page, pageSize) {
         var _this = this;
         return this.http.get(this.customersBaseUrl + "/page/" + page + "/" + pageSize, { observe: 'response' })
@@ -1647,8 +1654,8 @@ var LoginComponent = (function () {
     };
     LoginComponent.prototype.buildForm = function () {
         this.loginForm = this.formBuilder.group({
-            email: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["e" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_4__core_services_validation_service__["a" /* ValidationService */].emailValidator]],
-            password: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["e" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_4__core_services_validation_service__["a" /* ValidationService */].passwordValidator]]
+            email: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["g" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_4__core_services_validation_service__["a" /* ValidationService */].emailValidator]],
+            password: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["g" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_4__core_services_validation_service__["a" /* ValidationService */].passwordValidator]]
         });
     };
     LoginComponent.prototype.submit = function (_a) {
@@ -1716,7 +1723,7 @@ var LoginModule = (function () {
     }
     LoginModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
-            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* ReactiveFormsModule */], __WEBPACK_IMPORTED_MODULE_2__shared_shared_module__["a" /* SharedModule */], __WEBPACK_IMPORTED_MODULE_3__login_routing_module__["a" /* LoginRoutingModule */]],
+            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["f" /* ReactiveFormsModule */], __WEBPACK_IMPORTED_MODULE_2__shared_shared_module__["a" /* SharedModule */], __WEBPACK_IMPORTED_MODULE_3__login_routing_module__["a" /* LoginRoutingModule */]],
             declarations: [__WEBPACK_IMPORTED_MODULE_3__login_routing_module__["a" /* LoginRoutingModule */].components]
         })
     ], LoginModule);
@@ -1875,7 +1882,7 @@ var FilterTextboxModule = (function () {
     }
     FilterTextboxModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
-            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */], __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormsModule */]],
+            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */], __WEBPACK_IMPORTED_MODULE_2__angular_forms__["d" /* FormsModule */]],
             exports: [__WEBPACK_IMPORTED_MODULE_3__filter_textbox_component__["a" /* FilterTextboxComponent */]],
             declarations: [__WEBPACK_IMPORTED_MODULE_3__filter_textbox_component__["a" /* FilterTextboxComponent */]]
         })
@@ -2456,7 +2463,7 @@ var SharedModule = (function () {
     SharedModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             imports: [__WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */], __WEBPACK_IMPORTED_MODULE_4__map_map_module__["a" /* MapModule */], __WEBPACK_IMPORTED_MODULE_3__filter_textbox_filter_textbox_module__["a" /* FilterTextboxModule */], __WEBPACK_IMPORTED_MODULE_5__pagination_pagination_module__["a" /* PaginationModule */]],
-            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */], __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormsModule */], __WEBPACK_IMPORTED_MODULE_6__pipes_capitalize_pipe__["a" /* CapitalizePipe */], __WEBPACK_IMPORTED_MODULE_7__pipes_trim_pipe__["a" /* TrimPipe */], __WEBPACK_IMPORTED_MODULE_8__directives_sortby_directive__["a" /* SortByDirective */],
+            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */], __WEBPACK_IMPORTED_MODULE_2__angular_forms__["d" /* FormsModule */], __WEBPACK_IMPORTED_MODULE_6__pipes_capitalize_pipe__["a" /* CapitalizePipe */], __WEBPACK_IMPORTED_MODULE_7__pipes_trim_pipe__["a" /* TrimPipe */], __WEBPACK_IMPORTED_MODULE_8__directives_sortby_directive__["a" /* SortByDirective */],
                 __WEBPACK_IMPORTED_MODULE_4__map_map_module__["a" /* MapModule */], __WEBPACK_IMPORTED_MODULE_3__filter_textbox_filter_textbox_module__["a" /* FilterTextboxModule */], __WEBPACK_IMPORTED_MODULE_5__pagination_pagination_module__["a" /* PaginationModule */]],
             declarations: [__WEBPACK_IMPORTED_MODULE_6__pipes_capitalize_pipe__["a" /* CapitalizePipe */], __WEBPACK_IMPORTED_MODULE_7__pipes_trim_pipe__["a" /* TrimPipe */], __WEBPACK_IMPORTED_MODULE_8__directives_sortby_directive__["a" /* SortByDirective */]]
         })

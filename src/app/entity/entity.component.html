@@ -3,23 +3,45 @@
     <header>
       <h3><span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;Entity Information</h3>
     </header>
-    <br />
-    <div class="navbar app-slim-navbar">
-      <ul class="nav navbar-nav">
-        <li class="toolbar-item">
-          <a routerLink="details" routerLinkActive="active">
-            <span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;Entity Details
-          </a>
-        </li>
-        <li class="toolbar-item">
-          <a routerLink="edit" routerLinkActive="active">
-            <span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;Edit Entity
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="container">
-      <router-outlet></router-outlet>
+    <form *ngIf="entity" [formGroup]="entityForm">
+      <div class="app-content-left">
+        <div class="app-input-row-huge">
+          <label>Name:</label>
+          <input formControlName="name">
+        </div>
+        <div class="app-input-row">
+          <label>ID:</label>
+          <input formControlName="_id">
+        </div>
+        <div class="app-input-row-half">
+          <label>created:</label>
+          <span class="app-input-info disabled">{{entityForm.value.crstamp*1000 | date : 'yyyy-MM-dd HH:mm:ss'}}</span>
+        </div>
+        <div class="app-input-row-half">
+          <label>last updated:</label>
+          <span class="app-input-info disabled">{{entityForm.value.tstamp*1000 | date : 'yyyy-MM-dd HH:mm:ss'}}</span>
+        </div>
+        <div class="app-input-row">
+          <span class="glyphicon glyphicon-plus app-input-action">new plugin</span>
+          <label>plugins:</label>
+          <ul *ngIf="entityForm.value.plugins.length" class="app-input-info">
+              <li *ngFor="let plugin of entityForm.value.plugins">
+                  <span class="glyphicon glyphicon-edit app-input-action">edit</span>
+                  <b>{{plugin.pluginId}}</b>
+                  {{plugin.description}}
+              </li>
+          </ul>
+          <span *ngIf="!entityForm.value.plugins.length"
+                class="app-input-info disabled">no plugins</span>
+        </div>
+        <div class="app-input-row">
+          <label>schema:</label>
+          <span class="app-input-info">{{entityForm.value.schema}}</span>
+        </div>
+      </div>
+    </form>
+    <div *ngIf="!entity" class="container">
+      No entity found
     </div>
   </div>
 </div>

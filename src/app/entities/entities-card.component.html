@@ -3,10 +3,10 @@
     <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let entity of entities">
       <div class="card">
         <div class="card-header">
-          <a [routerLink]="['/entity',entity._id,'details']" class="white">
+          <a [routerLink]="['/entity',entity._id]" class="white">
             {{entity.name }}
           </a>
-          <a [routerLink]="['/entity',entity._id,'edit']">
+          <a [routerLink]="['/entity',entity._id]">
             <i title="Edit"
                class="pull-right glyphicon glyphicon-edit edit-icon white"></i>
           </a>

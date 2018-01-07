@@ -1,4 +1,33 @@
 [
-  { "_id" : "5a2f1fb1c64f08cc3d33d23f", "name" : "first try" },
-  { "_id" : "5a2f2262c64f08cc3d33d240", "name" : "second try" }
+  {
+    "_id" : "$address",
+    "crstamp": 1515290100,
+    "tstamp": 1515290200,
+    "name" : "Address",
+    "plugins": [
+      {
+        "pluginId": "$timestamp",
+        "description": "only crstamp",
+        "onCreate": true,
+        "onCreateField": "crstamp",
+        "onUpdate": false
+      },
+      {
+        "pluginId": "$timestamp",
+        "description": "only tstamp",
+        "onCreate": false,
+        "onUpdate": true,
+        "onUpdateField": "tstamp"
+      }
+    ],
+    "schema" : "$address"
+  },
+  {
+    "_id" : "$user",
+    "crstamp": 1515260100,
+    "tstamp": 1515260200,
+    "name" : "User",
+    "plugins": [],
+    "schema" : "$user"
+  }
 ]
