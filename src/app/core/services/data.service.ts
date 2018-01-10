@@ -4,12 +4,14 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { map, catchError } from 'rxjs/operators';
 
-import {ICustomer, IOrder, IState, IPagedResults, IApiResponse, IEntity} from '../../shared/interfaces';
+import {ICustomer, IOrder, IState, IPagedResults, IApiResponse, IEntity, ISchema, IPlugin} from '../../shared/interfaces';
 
 @Injectable()
 export class DataService {
 
     entityBaseUrl: string = '/config/entity';
+    schemaBaseUrl: string = '/config/schema';
+    pluginBaseUrl: string = '/config/plugin';
     customersBaseUrl: string = '/api/customers';
     ordersBaseUrl: string = '/api/orders';
     orders: IOrder[];
@@ -23,6 +25,22 @@ export class DataService {
 
     getEntity(id: string): Observable<IEntity> {
       return this.http.get<IEntity>(this.entityBaseUrl + '/' + id);
+    }
+
+    getSchemas(): Observable<ISchema[]> {
+        return this.http.get<ISchema[]>(this.schemaBaseUrl);
+    }
+
+    getSchema(id: string): Observable<ISchema> {
+      return this.http.get<ISchema>(this.schemaBaseUrl + '/' + id);
+    }
+
+    getPlugins(): Observable<IPlugin[]> {
+        return this.http.get<IPlugin[]>(this.pluginBaseUrl);
+    }
+
+    getPlugin(id: string): Observable<IPlugin> {
+      return this.http.get<IPlugin>(this.pluginBaseUrl + '/' + id);
     }
 
     getCustomersPage(page: number, pageSize: number): Observable<IPagedResults<ICustomer[]>> {

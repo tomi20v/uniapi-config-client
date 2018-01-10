@@ -6,6 +6,16 @@ export interface IEntity {
     name: string
 }
 
+export interface ISchema {
+    $id: string,
+    description?: string
+}
+
+export interface IPlugin {
+    $id: string,
+    title?: string
+}
+
 export interface ICustomer {
     id: number;
     firstName: string;

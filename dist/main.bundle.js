@@ -1139,6 +1139,8 @@ var DataService = (function () {
     function DataService(http) {
         this.http = http;
         this.entityBaseUrl = '/config/entity';
+        this.schemaBaseUrl = '/config/schema';
+        this.pluginBaseUrl = '/config/plugin';
         this.customersBaseUrl = '/api/customers';
         this.ordersBaseUrl = '/api/orders';
     }
@@ -1147,6 +1149,18 @@ var DataService = (function () {
     };
     DataService.prototype.getEntity = function (id) {
         return this.http.get(this.entityBaseUrl + '/' + id);
+    };
+    DataService.prototype.getSchemas = function () {
+        return this.http.get(this.schemaBaseUrl);
+    };
+    DataService.prototype.getSchema = function (id) {
+        return this.http.get(this.schemaBaseUrl + '/' + id);
+    };
+    DataService.prototype.getPlugins = function () {
+        return this.http.get(this.pluginBaseUrl);
+    };
+    DataService.prototype.getPlugin = function (id) {
+        return this.http.get(this.pluginBaseUrl + '/' + id);
     };
     DataService.prototype.getCustomersPage = function (page, pageSize) {
         var _this = this;

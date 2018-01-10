@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {DataService} from '../core/services/data.service';
-import {IEntity} from '../shared/interfaces';
+import {IEntity, ISchema} from '../shared/interfaces';
 import {ActivatedRoute, Params} from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 
@@ -19,6 +19,12 @@ export class EntityComponent implements OnInit {
     plugins: new FormControl(),
     schema: new FormControl()
   });
+  schemas: ISchema[] = [];
+  pluginEditing = {
+    index: null,
+    pluginId: null,
+    pluginConfig: null
+  };
 
   constructor(
     private route: ActivatedRoute,
@@ -36,6 +42,34 @@ export class EntityComponent implements OnInit {
           });
       }
     );
+    this.dataService.getSchemas()
+      .subscribe((schemas: ISchema[]) => {
+        this.schemas = schemas;
+      });
+  }
+
+  editPlugin(index: number, pluginConfig: any): void {
+    this.pluginEditing = {...this.pluginEditing,
+      index: index,
+      pluginId: pluginConfig.pluginId,
+      pluginConfig: pluginConfig
+    };
+  }
+
+  addPlugin(): void {
+    this.pluginEditing = {...this.pluginEditing,
+      index: null,
+      pluginId: null,
+      pluginConfig: null
+    };
+  }
+
+  pluginSelected(pluginId: string): void {
+    this.pluginEditing = {...this.pluginEditing,
+      index: null,
+      pluginId: pluginId,
+      pluginConfig: {}
+    };
   }
 
 }

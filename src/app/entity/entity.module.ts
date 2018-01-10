@@ -5,6 +5,8 @@ import {SharedModule} from '../shared/shared.module';
 import { EntityRoutingModule } from './entity-routing.module';
 import { EntityComponent } from './entity.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { PluginEditorComponent } from './plugin-editor/plugin-editor.component';
+import { PluginChooserComponent } from './plugin-chooser/plugin-chooser.component';
 
 @NgModule({
   imports: [
@@ -13,6 +15,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     FormsModule,
     ReactiveFormsModule
   ],
-  declarations: [EntityComponent]
+  declarations: [EntityComponent, PluginEditorComponent, PluginChooserComponent]
 })
 export class EntityModule { }

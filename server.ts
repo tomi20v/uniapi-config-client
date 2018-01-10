@@ -6,7 +6,8 @@ var express     = require('express'),
     customers   = JSON.parse(fs.readFileSync('data/customers.json', 'utf-8')),
     states      = JSON.parse(fs.readFileSync('data/states.json', 'utf-8')),
     entities    = JSON.parse(fs.readFileSync('data/entities.json', 'utf-8')),
-    schemas     = JSON.parse(fs.readFileSync('data/schemas.json', 'utf-8'));
+    schemas     = JSON.parse(fs.readFileSync('data/schemas.json', 'utf-8')),
+    plugins     = JSON.parse(fs.readFileSync('data/plugins.json', 'utf-8'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -43,7 +44,23 @@ app.get('/config/schema/:id', (req, res) => {
     let ret = null;
     for (const schema of schemas) {
         if (schema.$id === id) {
-            ret = schema;
+            ret = schema.schema;
+            break;
+        }
+    }
+    res.json(ret);
+});
+
+app.get('/config/plugin', (req, res) => {
+    res.json(plugins);
+});
+
+app.get('/config/plugin/:id', (req, res) => {
+    const id = req.params.id;
+    let ret = null;
+    for (const plugin of plugins) {
+        if (plugin.$id === id) {
+            ret = plugin;
             break;
         }
     }

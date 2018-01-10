@@ -3,8 +3,8 @@
     <header>
       <h3><span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;Entity Information</h3>
     </header>
-    <form *ngIf="entity" [formGroup]="entityForm">
-      <div class="app-content-left">
+    <div *ngIf="entity" class="app-content-left">
+      <form [formGroup]="entityForm" class="app-column">
         <div class="app-input-row-huge">
           <label>Name:</label>
           <input formControlName="name">
@@ -22,11 +22,24 @@
           <span class="app-input-info disabled">{{entityForm.value.tstamp*1000 | date : 'yyyy-MM-dd HH:mm:ss'}}</span>
         </div>
         <div class="app-input-row">
-          <span class="glyphicon glyphicon-plus app-input-action">new plugin</span>
+          <span (click)="addPlugin()"
+                class="app-input-action">
+            new plugin
+            <span class="glyphicon glyphicon-plus"></span>
+          </span>
           <label>plugins:</label>
           <ul *ngIf="entityForm.value.plugins.length" class="app-input-info">
-              <li *ngFor="let plugin of entityForm.value.plugins">
-                  <span class="glyphicon glyphicon-edit app-input-action">edit</span>
+              <li *ngFor="let plugin of entityForm.value.plugins; let index = index">
+                  <span *ngIf="index !== pluginEditing.index"
+                        (click)="editPlugin(index, plugin)"
+                        class="app-input-action">
+                    edit
+                    <span class="glyphicon glyphicon-edit"></span>
+                  </span>
+                  <span *ngIf="index === pluginEditing.index" class="app-input-action">
+                    <span>currently editing</span>
+                    <span class="glyphicon glyphicon-arrow-right"></span>
+                  </span>
                   <b>{{plugin.pluginId}}</b>
                   {{plugin.description}}
               </li>
@@ -36,18 +49,21 @@
         </div>
         <div class="app-input-row">
           <label>schema:</label>
-          <span class="app-input-info">{{entityForm.value.schema}}</span>
+          <select formControlName="schema">
+              <option *ngFor="let schema of schemas" value="{{schema.$id}}">{{schema.$id}}</option>
+          </select>
         </div>
+      </form>
+      <div class="app-column">
+        <plugin-chooser *ngIf="!pluginEditing.pluginId"
+          (onAdd)="pluginSelected($event)"></plugin-chooser>
+        <plugin-editor [pluginId]="pluginEditing.pluginId"
+          [pluginConfig]="pluginEditing.pluginConfig"
+          [pluginIndex]="pluginEditing.index"></plugin-editor>
       </div>
-    </form>
-    <div *ngIf="!entity" class="container">
+    </div>
+    <div *ngIf="!entity" class="app-content-left">
       No entity found
     </div>
   </div>
 </div>
-
-
-
-
-
-

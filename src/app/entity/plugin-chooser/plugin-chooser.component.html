@@ -1,0 +1,10 @@
+<div>
+  <label>choose plugin to add:</label>
+  <ul>
+    <li *ngFor="let plugin of plugins"
+      (click)="clicked(plugin.$id)">
+      <b>{{plugin.$id}}</b>
+      {{plugin.description}} &raquo;
+    </li>
+  </ul>
+</div>

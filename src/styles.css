@@ -7,7 +7,6 @@
 .app-content-left {
     float: left;
     width: 83.3%;
-    padding-left: 20px;
 }
 .app-input-row,
 .app-input-row-huge,
@@ -32,12 +31,17 @@
     margin-bottom: 0;
     float: left;
 }
-.app-input-row input, .app-input-row-huge input {
+.app-input-row input,
+.app-input-row select,
+.app-input-row-huge input {
     border: none;
     border-bottom: 2px solid gray;
+    background: none;
     width: 100%;
 }
-.app-input-row input:focus, .app-input-row-huge input:focus {
+.app-input-row input:focus,
+.app-input-row select:focus,
+.app-input-row-huge input:focus {
     outline: none;
 }
 .app-input-row-huge input {
@@ -73,4 +77,9 @@ ul.app-input-info >li:hover {
 .app-input-action:hover {
     color: blue;
     cursor: pointer;
+}
+.app-content-left>.app-column {
+    width: 49%;
+    float: left;
+    padding-left: 20px;
 }

@@ -1,0 +1,10 @@
+<div *ngIf="pluginId">
+  <label *ngIf="pluginIndex !== null">editing:</label>
+  <label *ngIf="pluginIndex === null">adding new:</label>
+  {{pluginId}} plugin
+  <div *ngIf="pluginSchema">
+    <textarea>{{pluginConfig | json}}</textarea>
+    <pre>{{pluginSchema | json}}</pre>
+  </div>
+  <div *ngIf="!pluginSchema">loading schema...</div>
+</div>
