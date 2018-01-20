@@ -149,6 +149,6 @@ ul.app-input-info >li:hover {
     float: left;
     margin-right: 4%;
 }
-.app-topline label {
+.app-topline>span {
     font-size: 125%;
 }

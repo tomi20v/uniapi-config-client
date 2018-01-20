@@ -1,11 +1,17 @@
 <div *ngIf="pluginId">
   <span *ngIf="pluginIndex !== null" class="app-topline">
-    <button (click)="onRemoveFn()">remove plugin</button>
-    <label>editing</label>{{pluginId}} plugin
+    <div (click)="onRemoveFn()" class="app-input-action">
+      remove plugin
+      <i class="glyphicon glyphicon-remove"></i>
+    </div>
+    <span>editing</span>
   </span>
-  <span *ngIf="pluginIndex === null">
-    <label class="app-toplevel">adding new</label>
-    {{pluginId}} plugin
+  <span *ngIf="pluginIndex === null" class="app-topline">
+    <div (click)="onRemoveFn()" class="app-input-action">
+      cancel
+      <i class="glyphicon glyphicon-remove"></i>
+    </div>
+    <span>adding new</span>
   </span>
   <div *ngIf="pluginSchema" [ngClass]="{'app-form-invalid': !isValid}">
     <json-schema-form

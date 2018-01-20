@@ -48,6 +48,14 @@ export class EntityComponent implements OnInit {
       });
   }
 
+  initPluginEditing(): void {
+    this.pluginEditing = {
+      index: null,
+      pluginId: null,
+      pluginConfig: null
+    };
+  }
+
   editPlugin(index: number, pluginConfig: any): void {
     this.pluginEditing = {...this.pluginEditing,
       index: index,
@@ -56,16 +64,12 @@ export class EntityComponent implements OnInit {
     };
   }
 
-  addPlugin(): void {
-    this.pluginEditing = {...this.pluginEditing,
-      index: null,
-      pluginId: null,
-      pluginConfig: null
-    };
+  onAddPlugin(): void {
+    this.initPluginEditing();
   }
 
   onPluginSelected(pluginId: string): void {
-    this.pluginEditing = {...this.pluginEditing,
+    this.pluginEditing = {
       index: null,
       pluginId: pluginId,
       pluginConfig: {}
@@ -73,8 +77,7 @@ export class EntityComponent implements OnInit {
   }
 
   onPluginUpdated(index, newPluginData): void {
-    let currentPlugins = this.entityForm.value.plugins;
-    // console.log('currentPlugins', currentPlugins);
+    const currentPlugins = this.entityForm.value.plugins;
     if (index === null) {
       currentPlugins.push(newPluginData);
     }
@@ -84,6 +87,15 @@ export class EntityComponent implements OnInit {
     this.entityForm.patchValue({plugins: currentPlugins});
     this.pluginEditing.index = null;
     this.pluginEditing.pluginId = null;
+  }
+
+  onPluginRemoved(index): void {
+    if (index !== null) {
+      const currentPlugins = this.entityForm.value.plugins;
+      currentPlugins.splice(index,1);
+      this.entityForm.patchValue({plugins: currentPlugins});
+    }
+    this.initPluginEditing();
   }
 
 }

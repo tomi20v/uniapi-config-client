@@ -23,7 +23,7 @@
         </div>
         <div class="app-input-row">
           <span *ngIf="pluginEditing.index !== null && pluginEditing.pluginId !== null"
-                (click)="addPlugin()" class="app-input-action">
+                (click)="onAddPlugin()" class="app-input-action">
             new plugin
             <span class="glyphicon glyphicon-plus"></span>
           </span>
@@ -70,7 +70,9 @@
         <plugin-editor [pluginId]="pluginEditing.pluginId"
           [pluginConfig]="pluginEditing.pluginConfig"
           [pluginIndex]="pluginEditing.index"
-          (onSubmit)="onPluginUpdated(pluginEditing.index, $event)"></plugin-editor>
+          (onSubmit)="onPluginUpdated(pluginEditing.index, $event)"
+          (onRemove)="onPluginRemoved($event)"
+        ></plugin-editor>
       </div>
     </div>
     <div *ngIf="!entity" class="app-content-left">

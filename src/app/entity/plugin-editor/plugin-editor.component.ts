@@ -1,5 +1,4 @@
 import {Component, Input, OnInit, OnChanges, Output, EventEmitter} from '@angular/core';
-import {NgClass} from '@angular/common';
 import {DataService} from '../../core/services/data.service';
 import {SimpleChanges} from '@angular/core/src/metadata/lifecycle_hooks';
 import {IPlugin} from '../../shared/interfaces';
