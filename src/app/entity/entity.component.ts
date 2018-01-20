@@ -64,12 +64,26 @@ export class EntityComponent implements OnInit {
     };
   }
 
-  pluginSelected(pluginId: string): void {
+  onPluginSelected(pluginId: string): void {
     this.pluginEditing = {...this.pluginEditing,
       index: null,
       pluginId: pluginId,
       pluginConfig: {}
     };
+  }
+
+  onPluginUpdated(index, newPluginData): void {
+    let currentPlugins = this.entityForm.value.plugins;
+    // console.log('currentPlugins', currentPlugins);
+    if (index === null) {
+      currentPlugins.push(newPluginData);
+    }
+    else {
+      currentPlugins[index] = newPluginData;
+    }
+    this.entityForm.patchValue({plugins: currentPlugins});
+    this.pluginEditing.index = null;
+    this.pluginEditing.pluginId = null;
   }
 
 }

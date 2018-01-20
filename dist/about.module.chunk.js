@@ -25,7 +25,7 @@ var AboutRoutingModule = (function () {
     }
     AboutRoutingModule.components = [__WEBPACK_IMPORTED_MODULE_2__about_component__["a" /* AboutComponent */]];
     AboutRoutingModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
             imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["d" /* RouterModule */].forChild(routes)],
             exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["d" /* RouterModule */]]
         })
@@ -99,7 +99,7 @@ var AboutModule = (function () {
     function AboutModule() {
     }
     AboutModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
             imports: [__WEBPACK_IMPORTED_MODULE_1__about_routing_module__["a" /* AboutRoutingModule */]],
             declarations: [__WEBPACK_IMPORTED_MODULE_1__about_routing_module__["a" /* AboutRoutingModule */].components]
         })

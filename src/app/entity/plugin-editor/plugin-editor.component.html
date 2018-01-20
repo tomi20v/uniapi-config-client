@@ -1,10 +1,22 @@
 <div *ngIf="pluginId">
-  <label *ngIf="pluginIndex !== null">editing:</label>
-  <label *ngIf="pluginIndex === null">adding new:</label>
-  {{pluginId}} plugin
-  <div *ngIf="pluginSchema">
-    <textarea>{{pluginConfig | json}}</textarea>
-    <pre>{{pluginSchema | json}}</pre>
+  <span *ngIf="pluginIndex !== null" class="app-topline">
+    <button (click)="onRemoveFn()">remove plugin</button>
+    <label>editing</label>{{pluginId}} plugin
+  </span>
+  <span *ngIf="pluginIndex === null">
+    <label class="app-toplevel">adding new</label>
+    {{pluginId}} plugin
+  </span>
+  <div *ngIf="pluginSchema" [ngClass]="{'app-form-invalid': !isValid}">
+    <json-schema-form
+      *ngIf="pluginSchema"
+      framework="no-framework"
+      loadExternalAssets="true"
+      [schema]="pluginSchema"
+      [(data)]="pluginConfig"
+      (isValid)="isValidFn($event)"
+      (onSubmit)="onSubmitFn()"
+      ></json-schema-form>
   </div>
   <div *ngIf="!pluginSchema">loading schema...</div>
 </div>

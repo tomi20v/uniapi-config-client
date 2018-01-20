@@ -1,4 +1,5 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import {Component, Input, OnInit, OnChanges, Output, EventEmitter} from '@angular/core';
+import {NgClass} from '@angular/common';
 import {DataService} from '../../core/services/data.service';
 import {SimpleChanges} from '@angular/core/src/metadata/lifecycle_hooks';
 import {IPlugin} from '../../shared/interfaces';
@@ -13,6 +14,9 @@ export class PluginEditorComponent implements OnInit, OnChanges {
   @Input() pluginId: string;
   @Input() pluginConfig: string;
   @Input() pluginIndex: number;
+  @Output() onSubmit: EventEmitter<any> = new EventEmitter();
+  @Output() onRemove: EventEmitter<number> = new EventEmitter();
+  isValid: boolean = false;
   pluginSchema: IPlugin = null;
 
   constructor(
@@ -35,6 +39,20 @@ export class PluginEditorComponent implements OnInit, OnChanges {
           this.pluginSchema = plugin;
         });
     }
+  }
+
+  isValidFn(isValid): void {
+    this.isValid = isValid;
+  }
+
+  onSubmitFn():void {
+    if (this.isValid) {
+      this.onSubmit.emit(this.pluginConfig);
+    }
+  }
+
+  onRemoveFn(): void {
+    this.onRemove.emit(this.pluginIndex);
   }
 
 }

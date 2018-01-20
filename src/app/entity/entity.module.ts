@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 // import { CommonModule } from '@angular/common';
 import {SharedModule} from '../shared/shared.module';
+import { JsonSchemaFormModule } from 'angular2-json-schema-form';
 
 import { EntityRoutingModule } from './entity-routing.module';
 import { EntityComponent } from './entity.component';
@@ -13,7 +14,8 @@ import { PluginChooserComponent } from './plugin-chooser/plugin-chooser.componen
     SharedModule,
     EntityRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    JsonSchemaFormModule
   ],
   declarations: [EntityComponent, PluginEditorComponent, PluginChooserComponent]
 })

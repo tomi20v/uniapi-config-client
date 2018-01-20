@@ -1,33 +1,43 @@
 <div class="orders view">
   <div class="container">
-    <header>
-      <h3><span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;Entity Information</h3>
-    </header>
     <div *ngIf="entity" class="app-content-left">
+      <header>
+        <h3><span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;Entity Information</h3>
+      </header>
       <form [formGroup]="entityForm" class="app-column">
         <div class="app-input-row-huge">
-          <label>Name:</label>
+          <label>Name</label>
           <input formControlName="name">
         </div>
         <div class="app-input-row">
-          <label>ID:</label>
+          <label>ID</label>
           <input formControlName="_id">
         </div>
         <div class="app-input-row-half">
-          <label>created:</label>
+          <label>created</label>
           <span class="app-input-info disabled">{{entityForm.value.crstamp*1000 | date : 'yyyy-MM-dd HH:mm:ss'}}</span>
         </div>
         <div class="app-input-row-half">
-          <label>last updated:</label>
+          <label>last updated</label>
           <span class="app-input-info disabled">{{entityForm.value.tstamp*1000 | date : 'yyyy-MM-dd HH:mm:ss'}}</span>
         </div>
         <div class="app-input-row">
-          <span (click)="addPlugin()"
-                class="app-input-action">
+          <span *ngIf="pluginEditing.index !== null && pluginEditing.pluginId !== null"
+                (click)="addPlugin()" class="app-input-action">
             new plugin
             <span class="glyphicon glyphicon-plus"></span>
           </span>
-          <label>plugins:</label>
+          <span *ngIf="pluginEditing.index === null && pluginEditing.pluginId === null"
+                class="app-input-action">
+            select new plugin ID
+            <span class="glyphicon glyphicon-arrow-right"></span>
+          </span>
+          <span *ngIf="pluginEditing.index === null && pluginEditing.pluginId !== null"
+                class="app-input-action">
+            edit new plugin
+            <span class="glyphicon glyphicon-arrow-right"></span>
+          </span>
+          <label>plugins</label>
           <ul *ngIf="entityForm.value.plugins.length" class="app-input-info">
               <li *ngFor="let plugin of entityForm.value.plugins; let index = index">
                   <span *ngIf="index !== pluginEditing.index"
@@ -48,7 +58,7 @@
                 class="app-input-info disabled">no plugins</span>
         </div>
         <div class="app-input-row">
-          <label>schema:</label>
+          <label>schema</label>
           <select formControlName="schema">
               <option *ngFor="let schema of schemas" value="{{schema.$id}}">{{schema.$id}}</option>
           </select>
@@ -56,10 +66,11 @@
       </form>
       <div class="app-column">
         <plugin-chooser *ngIf="!pluginEditing.pluginId"
-          (onAdd)="pluginSelected($event)"></plugin-chooser>
+          (onAdd)="onPluginSelected($event)"></plugin-chooser>
         <plugin-editor [pluginId]="pluginEditing.pluginId"
           [pluginConfig]="pluginEditing.pluginConfig"
-          [pluginIndex]="pluginEditing.index"></plugin-editor>
+          [pluginIndex]="pluginEditing.index"
+          (onSubmit)="onPluginUpdated(pluginEditing.index, $event)"></plugin-editor>
       </div>
     </div>
     <div *ngIf="!entity" class="app-content-left">

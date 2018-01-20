@@ -61,20 +61,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 var app_routes = [
-    { path: '', pathMatch: 'full', redirectTo: '/customers' },
+    { path: '', pathMatch: 'full', redirectTo: '/entities' },
     { path: 'entity/:id', loadChildren: 'app/entity/entity.module#EntityModule' },
     { path: 'entities', loadChildren: 'app/entities/entities.module#EntitiesModule' },
     { path: 'customers/:id', loadChildren: 'app/customer/customer.module#CustomerModule' },
     { path: 'customers', loadChildren: 'app/customers/customers.module#CustomersModule' },
     { path: 'orders', loadChildren: 'app/orders/orders.module#OrdersModule' },
     { path: 'about', loadChildren: 'app/about/about.module#AboutModule' },
-    { path: '**', pathMatch: 'full', redirectTo: '/customers' } // catch any unfound routes and redirect to home page
+    { path: '**', pathMatch: 'full', redirectTo: '/entities' } // catch any unfound routes and redirect to home page
 ];
 var AppRoutingModule = (function () {
     function AppRoutingModule() {
     }
     AppRoutingModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
             imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["d" /* RouterModule */].forRoot(app_routes, { preloadingStrategy: __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* PreloadAllModules */] })],
             exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["d" /* RouterModule */]]
         })
@@ -134,6 +134,7 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__login_login_module__ = __webpack_require__("../../../../../src/app/login/login.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__core_core_module__ = __webpack_require__("../../../../../src/app/core/core.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_shared_module__ = __webpack_require__("../../../../../src/app/shared/shared.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angular2_json_schema_form__ = __webpack_require__("../../../../angular2-json-schema-form/angular2-json-schema-form.es5.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -147,17 +148,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
             imports: [
                 __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_4__login_login_module__["a" /* LoginModule */],
                 __WEBPACK_IMPORTED_MODULE_3__app_routing_module__["a" /* AppRoutingModule */],
                 __WEBPACK_IMPORTED_MODULE_5__core_core_module__["a" /* CoreModule */],
-                __WEBPACK_IMPORTED_MODULE_6__shared_shared_module__["a" /* SharedModule */] //Shared (multi-instance) objects
+                __WEBPACK_IMPORTED_MODULE_6__shared_shared_module__["a" /* SharedModule */],
+                __WEBPACK_IMPORTED_MODULE_7_angular2_json_schema_form__["b" /* NoFrameworkModule */],
+                __WEBPACK_IMPORTED_MODULE_7_angular2_json_schema_form__["a" /* JsonSchemaFormModule */].forRoot(__WEBPACK_IMPORTED_MODULE_7_angular2_json_schema_form__["b" /* NoFrameworkModule */])
             ],
             declarations: [__WEBPACK_IMPORTED_MODULE_2__app_component__["a" /* AppComponent */]],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_2__app_component__["a" /* AppComponent */]]
@@ -238,7 +242,7 @@ var CoreModule = (function (_super) {
         return _super.call(this, parentModule) || this;
     }
     CoreModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
             imports: [__WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */], __WEBPACK_IMPORTED_MODULE_2__angular_router__["d" /* RouterModule */], __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpClientModule */], __WEBPACK_IMPORTED_MODULE_4__growler_growler_module__["a" /* GrowlerModule */], __WEBPACK_IMPORTED_MODULE_5__modal_modal_module__["a" /* ModalModule */], __WEBPACK_IMPORTED_MODULE_6__overlay_overlay_module__["a" /* OverlayModule */]],
             exports: [__WEBPACK_IMPORTED_MODULE_4__growler_growler_module__["a" /* GrowlerModule */], __WEBPACK_IMPORTED_MODULE_2__angular_router__["d" /* RouterModule */], __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpClientModule */], __WEBPACK_IMPORTED_MODULE_5__modal_modal_module__["a" /* ModalModule */], __WEBPACK_IMPORTED_MODULE_6__overlay_overlay_module__["a" /* OverlayModule */], __WEBPACK_IMPORTED_MODULE_8__navbar_navbar_component__["a" /* NavbarComponent */]],
             declarations: [__WEBPACK_IMPORTED_MODULE_8__navbar_navbar_component__["a" /* NavbarComponent */]],
@@ -251,7 +255,7 @@ var CoreModule = (function (_super) {
                 }
             ] // these should be singleton
         }),
-        __param(0, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["O" /* Optional */])()), __param(0, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_2" /* SkipSelf */])()),
+        __param(0, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Q" /* Optional */])()), __param(0, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* SkipSelf */])()),
         __metadata("design:paramtypes", [CoreModule])
     ], CoreModule);
     return CoreModule;
@@ -351,11 +355,11 @@ var GrowlerComponent = (function () {
         });
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
         __metadata("design:type", String)
     ], GrowlerComponent.prototype, "position", void 0);
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
         __metadata("design:type", Number)
     ], GrowlerComponent.prototype, "timeout", void 0);
     GrowlerComponent = __decorate([
@@ -448,13 +452,13 @@ var GrowlerModule = (function (_super) {
         return _super.call(this, parentModule) || this;
     }
     GrowlerModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
             imports: [__WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */]],
             exports: [__WEBPACK_IMPORTED_MODULE_3__growler_component__["a" /* GrowlerComponent */]],
             providers: [__WEBPACK_IMPORTED_MODULE_4__growler_service__["b" /* GrowlerService */]],
             declarations: [__WEBPACK_IMPORTED_MODULE_3__growler_component__["a" /* GrowlerComponent */]]
         }),
-        __param(0, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["O" /* Optional */])()), __param(0, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_2" /* SkipSelf */])()),
+        __param(0, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Q" /* Optional */])()), __param(0, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* SkipSelf */])()),
         __metadata("design:paramtypes", [GrowlerModule])
     ], GrowlerModule);
     return GrowlerModule;
@@ -485,7 +489,7 @@ var GrowlerService = (function () {
     function GrowlerService() {
     }
     GrowlerService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
         __metadata("design:paramtypes", [])
     ], GrowlerService);
     return GrowlerService;
@@ -528,7 +532,7 @@ var AuthInterceptor = (function () {
         return next.handle(authReq);
     };
     AuthInterceptor = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
         __metadata("design:paramtypes", [])
     ], AuthInterceptor);
     return AuthInterceptor;
@@ -680,13 +684,13 @@ var ModalModule = (function (_super) {
         return _super.call(this, parentModule) || this;
     }
     ModalModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
             imports: [__WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */]],
             exports: [__WEBPACK_IMPORTED_MODULE_3__modal_component__["a" /* ModalComponent */]],
             declarations: [__WEBPACK_IMPORTED_MODULE_3__modal_component__["a" /* ModalComponent */]],
             providers: [__WEBPACK_IMPORTED_MODULE_4__modal_service__["a" /* ModalService */]]
         }),
-        __param(0, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["O" /* Optional */])()), __param(0, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_2" /* SkipSelf */])()),
+        __param(0, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Q" /* Optional */])()), __param(0, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* SkipSelf */])()),
         __metadata("design:paramtypes", [ModalModule])
     ], ModalModule);
     return ModalModule;
@@ -716,7 +720,7 @@ var ModalService = (function () {
     function ModalService() {
     }
     ModalService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
         __metadata("design:paramtypes", [])
     ], ModalService);
     return ModalService;
@@ -856,7 +860,7 @@ var OverlayRequestResponseInterceptor = (function () {
         return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
     };
     OverlayRequestResponseInterceptor = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4__services_event_bus_service__["b" /* EventBusService */]])
     ], OverlayRequestResponseInterceptor);
     return OverlayRequestResponseInterceptor;
@@ -952,7 +956,7 @@ var OverlayComponent = (function () {
         this.httpResponseSub.unsubscribe();
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
         __metadata("design:type", Object)
     ], OverlayComponent.prototype, "delay", void 0);
     OverlayComponent = __decorate([
@@ -1016,7 +1020,7 @@ var OverlayModule = (function (_super) {
         return _super.call(this, parentModule) || this;
     }
     OverlayModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
             imports: [__WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */]],
             exports: [__WEBPACK_IMPORTED_MODULE_5__overlay_component__["a" /* OverlayComponent */]],
             declarations: [__WEBPACK_IMPORTED_MODULE_5__overlay_component__["a" /* OverlayComponent */]],
@@ -1028,7 +1032,7 @@ var OverlayModule = (function (_super) {
                 }
             ]
         }),
-        __param(0, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["O" /* Optional */])()), __param(0, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_2" /* SkipSelf */])()),
+        __param(0, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Q" /* Optional */])()), __param(0, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* SkipSelf */])()),
         __metadata("design:paramtypes", [OverlayModule])
     ], OverlayModule);
     return OverlayModule;
@@ -1065,7 +1069,7 @@ var AuthService = (function () {
         this.http = http;
         this.authUrl = '/api/auth';
         this.isAuthenticated = false;
-        this.authChanged = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["v" /* EventEmitter */]();
+        this.authChanged = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
     }
     AuthService.prototype.userAuthChanged = function (status) {
         this.authChanged.emit(status); //Raise changed event
@@ -1099,11 +1103,11 @@ var AuthService = (function () {
         return __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["a" /* Observable */].throw(error || 'Server error');
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["P" /* Output */])(),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["v" /* EventEmitter */])
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["R" /* Output */])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */])
     ], AuthService.prototype, "authChanged", void 0);
     AuthService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["b" /* HttpClient */]])
     ], AuthService);
     return AuthService;
@@ -1231,7 +1235,7 @@ var DataService = (function () {
         }
     };
     DataService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["b" /* HttpClient */]])
     ], DataService);
     return DataService;
@@ -1271,7 +1275,7 @@ var DialogService = (function () {
         return resolve(window.confirm('Is it OK?'));
     };
     DialogService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])()
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])()
     ], DialogService);
     return DialogService;
 }());
@@ -1318,7 +1322,7 @@ var EventBusService = (function () {
         this.subject.next(event);
     };
     EventBusService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
         __metadata("design:paramtypes", [])
     ], EventBusService);
     return EventBusService;
@@ -1385,7 +1389,7 @@ var FilterService = (function () {
         });
     };
     FilterService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
         __metadata("design:paramtypes", [])
     ], FilterService);
     return FilterService;
@@ -1471,7 +1475,7 @@ var SorterService = (function () {
         return (val && (typeof val === 'string' || val instanceof String));
     };
     SorterService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])()
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])()
     ], SorterService);
     return SorterService;
 }());
@@ -1506,7 +1510,7 @@ var TrackByService = (function () {
         return index;
     };
     TrackByService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])()
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])()
     ], TrackByService);
     return TrackByService;
 }());
@@ -1593,7 +1597,7 @@ var LoginRoutingModule = (function () {
     }
     LoginRoutingModule.components = [__WEBPACK_IMPORTED_MODULE_2__login_component__["a" /* LoginComponent */]];
     LoginRoutingModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
             imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["d" /* RouterModule */].forChild(routes)],
             exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["d" /* RouterModule */]]
         })
@@ -1668,8 +1672,8 @@ var LoginComponent = (function () {
     };
     LoginComponent.prototype.buildForm = function () {
         this.loginForm = this.formBuilder.group({
-            email: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["g" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_4__core_services_validation_service__["a" /* ValidationService */].emailValidator]],
-            password: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["g" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_4__core_services_validation_service__["a" /* ValidationService */].passwordValidator]]
+            email: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["m" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_4__core_services_validation_service__["a" /* ValidationService */].emailValidator]],
+            password: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["m" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_4__core_services_validation_service__["a" /* ValidationService */].passwordValidator]]
         });
     };
     LoginComponent.prototype.submit = function (_a) {
@@ -1701,7 +1705,7 @@ var LoginComponent = (function () {
             template: __webpack_require__("../../../../../src/app/login/login.component.html"),
             styles: [__webpack_require__("../../../../../src/app/login/login.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["c" /* FormBuilder */],
             __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */],
             __WEBPACK_IMPORTED_MODULE_3__core_services_auth_service__["a" /* AuthService */],
             __WEBPACK_IMPORTED_MODULE_5__core_growler_growler_service__["b" /* GrowlerService */]])
@@ -1736,8 +1740,8 @@ var LoginModule = (function () {
     function LoginModule() {
     }
     LoginModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
-            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["f" /* ReactiveFormsModule */], __WEBPACK_IMPORTED_MODULE_2__shared_shared_module__["a" /* SharedModule */], __WEBPACK_IMPORTED_MODULE_3__login_routing_module__["a" /* LoginRoutingModule */]],
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
+            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["l" /* ReactiveFormsModule */], __WEBPACK_IMPORTED_MODULE_2__shared_shared_module__["a" /* SharedModule */], __WEBPACK_IMPORTED_MODULE_3__login_routing_module__["a" /* LoginRoutingModule */]],
             declarations: [__WEBPACK_IMPORTED_MODULE_3__login_routing_module__["a" /* LoginRoutingModule */].components]
         })
     ], LoginModule);
@@ -1766,7 +1770,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var SortByDirective = (function () {
     function SortByDirective() {
-        this.sorted = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["v" /* EventEmitter */]();
+        this.sorted = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
     }
     Object.defineProperty(SortByDirective.prototype, "sortBy", {
         set: function (value) {
@@ -1780,16 +1784,16 @@ var SortByDirective = (function () {
         this.sorted.next(this.sortProperty); //Raise clicked event
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["P" /* Output */])(),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["v" /* EventEmitter */])
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["R" /* Output */])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */])
     ], SortByDirective.prototype, "sorted", void 0);
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])('cm-sort-by'),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])('cm-sort-by'),
         __metadata("design:type", String),
         __metadata("design:paramtypes", [String])
     ], SortByDirective.prototype, "sortBy", null);
     SortByDirective = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["s" /* Directive */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* Directive */])({
             selector: '[cm-sort-by]',
             host: {
                 '(click)': 'onClick($event)'
@@ -1848,15 +1852,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var FilterTextboxComponent = (function () {
     function FilterTextboxComponent() {
         this.model = { filter: null };
-        this.changed = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["v" /* EventEmitter */]();
+        this.changed = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
     }
     FilterTextboxComponent.prototype.filterChanged = function (event) {
         event.preventDefault();
         this.changed.emit(this.model.filter); //Raise changed event
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["P" /* Output */])(),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["v" /* EventEmitter */])
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["R" /* Output */])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */])
     ], FilterTextboxComponent.prototype, "changed", void 0);
     FilterTextboxComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -1895,8 +1899,8 @@ var FilterTextboxModule = (function () {
     function FilterTextboxModule() {
     }
     FilterTextboxModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
-            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */], __WEBPACK_IMPORTED_MODULE_2__angular_forms__["d" /* FormsModule */]],
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
+            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */], __WEBPACK_IMPORTED_MODULE_2__angular_forms__["g" /* FormsModule */]],
             exports: [__WEBPACK_IMPORTED_MODULE_3__filter_textbox_component__["a" /* FilterTextboxComponent */]],
             declarations: [__WEBPACK_IMPORTED_MODULE_3__filter_textbox_component__["a" /* FilterTextboxComponent */]]
         })
@@ -2071,41 +2075,41 @@ var MapComponent = (function () {
         });
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
         __metadata("design:type", Number)
     ], MapComponent.prototype, "height", void 0);
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
         __metadata("design:type", Number)
     ], MapComponent.prototype, "width", void 0);
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
         __metadata("design:type", Number)
     ], MapComponent.prototype, "latitude", void 0);
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
         __metadata("design:type", Number)
     ], MapComponent.prototype, "longitude", void 0);
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
         __metadata("design:type", String)
     ], MapComponent.prototype, "markerText", void 0);
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
         __metadata("design:type", Number)
     ], MapComponent.prototype, "zoom", void 0);
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
         __metadata("design:type", Boolean),
         __metadata("design:paramtypes", [Boolean])
     ], MapComponent.prototype, "enabled", null);
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_9" /* ViewChild */])('mapContainer'),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */])
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_12" /* ViewChild */])('mapContainer'),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ElementRef */])
     ], MapComponent.prototype, "mapDiv", void 0);
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["r" /* ContentChildren */])(__WEBPACK_IMPORTED_MODULE_2__mapPoint_component__["a" /* MapPointComponent */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* QueryList */])
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["s" /* ContentChildren */])(__WEBPACK_IMPORTED_MODULE_2__mapPoint_component__["a" /* MapPointComponent */]),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["W" /* QueryList */])
     ], MapComponent.prototype, "mapPoints", void 0);
     MapComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -2148,7 +2152,7 @@ var MapModule = (function () {
     function MapModule() {
     }
     MapModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
             imports: [__WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */]],
             exports: [__WEBPACK_IMPORTED_MODULE_2__map_component__["a" /* MapComponent */], __WEBPACK_IMPORTED_MODULE_3__mapPoint_component__["a" /* MapPointComponent */]],
             declarations: [__WEBPACK_IMPORTED_MODULE_2__map_component__["a" /* MapComponent */], __WEBPACK_IMPORTED_MODULE_3__mapPoint_component__["a" /* MapPointComponent */]]
@@ -2183,15 +2187,15 @@ var MapPointComponent = (function () {
     MapPointComponent.prototype.ngOnInit = function () {
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
         __metadata("design:type", Number)
     ], MapPointComponent.prototype, "longitude", void 0);
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
         __metadata("design:type", Number)
     ], MapPointComponent.prototype, "latitude", void 0);
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
         __metadata("design:type", String)
     ], MapPointComponent.prototype, "markerText", void 0);
     MapPointComponent = __decorate([
@@ -2256,7 +2260,7 @@ var PaginationComponent = (function () {
         this.isVisible = false;
         this.previousEnabled = false;
         this.nextEnabled = true;
-        this.pageChanged = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["v" /* EventEmitter */]();
+        this.pageChanged = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
     }
     Object.defineProperty(PaginationComponent.prototype, "pageSize", {
         get: function () {
@@ -2319,18 +2323,18 @@ var PaginationComponent = (function () {
         this.pageChanged.emit(page);
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
         __metadata("design:type", Number),
         __metadata("design:paramtypes", [Number])
     ], PaginationComponent.prototype, "pageSize", null);
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
         __metadata("design:type", Number),
         __metadata("design:paramtypes", [Number])
     ], PaginationComponent.prototype, "totalItems", null);
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["P" /* Output */])(),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["v" /* EventEmitter */])
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["R" /* Output */])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */])
     ], PaginationComponent.prototype, "pageChanged", void 0);
     PaginationComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -2368,7 +2372,7 @@ var PaginationModule = (function () {
     function PaginationModule() {
     }
     PaginationModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
             imports: [__WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */]],
             exports: [__WEBPACK_IMPORTED_MODULE_2__pagination_component__["a" /* PaginationComponent */]],
             declarations: [__WEBPACK_IMPORTED_MODULE_2__pagination_component__["a" /* PaginationComponent */]]
@@ -2401,7 +2405,7 @@ var CapitalizePipe = (function () {
         return typeof value === 'string' && value.charAt(0).toUpperCase() + value.slice(1) || value;
     };
     CapitalizePipe = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* Pipe */])({ name: 'capitalize' })
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["V" /* Pipe */])({ name: 'capitalize' })
     ], CapitalizePipe);
     return CapitalizePipe;
 }());
@@ -2433,7 +2437,7 @@ var TrimPipe = (function () {
         return value.trim();
     };
     TrimPipe = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* Pipe */])({ name: 'trim' })
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["V" /* Pipe */])({ name: 'trim' })
     ], TrimPipe);
     return TrimPipe;
 }());
@@ -2475,9 +2479,9 @@ var SharedModule = (function () {
     function SharedModule() {
     }
     SharedModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
             imports: [__WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */], __WEBPACK_IMPORTED_MODULE_4__map_map_module__["a" /* MapModule */], __WEBPACK_IMPORTED_MODULE_3__filter_textbox_filter_textbox_module__["a" /* FilterTextboxModule */], __WEBPACK_IMPORTED_MODULE_5__pagination_pagination_module__["a" /* PaginationModule */]],
-            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */], __WEBPACK_IMPORTED_MODULE_2__angular_forms__["d" /* FormsModule */], __WEBPACK_IMPORTED_MODULE_6__pipes_capitalize_pipe__["a" /* CapitalizePipe */], __WEBPACK_IMPORTED_MODULE_7__pipes_trim_pipe__["a" /* TrimPipe */], __WEBPACK_IMPORTED_MODULE_8__directives_sortby_directive__["a" /* SortByDirective */],
+            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */], __WEBPACK_IMPORTED_MODULE_2__angular_forms__["g" /* FormsModule */], __WEBPACK_IMPORTED_MODULE_6__pipes_capitalize_pipe__["a" /* CapitalizePipe */], __WEBPACK_IMPORTED_MODULE_7__pipes_trim_pipe__["a" /* TrimPipe */], __WEBPACK_IMPORTED_MODULE_8__directives_sortby_directive__["a" /* SortByDirective */],
                 __WEBPACK_IMPORTED_MODULE_4__map_map_module__["a" /* MapModule */], __WEBPACK_IMPORTED_MODULE_3__filter_textbox_filter_textbox_module__["a" /* FilterTextboxModule */], __WEBPACK_IMPORTED_MODULE_5__pagination_pagination_module__["a" /* PaginationModule */]],
             declarations: [__WEBPACK_IMPORTED_MODULE_6__pipes_capitalize_pipe__["a" /* CapitalizePipe */], __WEBPACK_IMPORTED_MODULE_7__pipes_trim_pipe__["a" /* TrimPipe */], __WEBPACK_IMPORTED_MODULE_8__directives_sortby_directive__["a" /* SortByDirective */]]
         })
@@ -2519,7 +2523,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].production) {
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_14" /* enableProdMode */])();
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_18" /* enableProdMode */])();
 }
 Object(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_2__app_app_module__["a" /* AppModule */])
     .catch(function (err) { return console.log(err); });

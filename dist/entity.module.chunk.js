@@ -24,7 +24,7 @@ var EntityRoutingModule = (function () {
     function EntityRoutingModule() {
     }
     EntityRoutingModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
             imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["d" /* RouterModule */].forChild(routes)],
             exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["d" /* RouterModule */]]
         })
@@ -39,7 +39,7 @@ var EntityRoutingModule = (function () {
 /***/ "../../../../../src/app/entity/entity.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"orders view\">\n  <div class=\"container\">\n    <header>\n      <h3><span class=\"glyphicon glyphicon-info-sign\"></span>&nbsp;&nbsp;Entity Information</h3>\n    </header>\n    <div *ngIf=\"entity\" class=\"app-content-left\">\n      <form [formGroup]=\"entityForm\" class=\"app-column\">\n        <div class=\"app-input-row-huge\">\n          <label>Name:</label>\n          <input formControlName=\"name\">\n        </div>\n        <div class=\"app-input-row\">\n          <label>ID:</label>\n          <input formControlName=\"_id\">\n        </div>\n        <div class=\"app-input-row-half\">\n          <label>created:</label>\n          <span class=\"app-input-info disabled\">{{entityForm.value.crstamp*1000 | date : 'yyyy-MM-dd HH:mm:ss'}}</span>\n        </div>\n        <div class=\"app-input-row-half\">\n          <label>last updated:</label>\n          <span class=\"app-input-info disabled\">{{entityForm.value.tstamp*1000 | date : 'yyyy-MM-dd HH:mm:ss'}}</span>\n        </div>\n        <div class=\"app-input-row\">\n          <span (click)=\"addPlugin()\"\n                class=\"app-input-action\">\n            new plugin\n            <span class=\"glyphicon glyphicon-plus\"></span>\n          </span>\n          <label>plugins:</label>\n          <ul *ngIf=\"entityForm.value.plugins.length\" class=\"app-input-info\">\n              <li *ngFor=\"let plugin of entityForm.value.plugins; let index = index\">\n                  <span *ngIf=\"index !== pluginEditing.index\"\n                        (click)=\"editPlugin(index, plugin)\"\n                        class=\"app-input-action\">\n                    edit\n                    <span class=\"glyphicon glyphicon-edit\"></span>\n                  </span>\n                  <span *ngIf=\"index === pluginEditing.index\" class=\"app-input-action\">\n                    <span>currently editing</span>\n                    <span class=\"glyphicon glyphicon-arrow-right\"></span>\n                  </span>\n                  <b>{{plugin.pluginId}}</b>\n                  {{plugin.description}}\n              </li>\n          </ul>\n          <span *ngIf=\"!entityForm.value.plugins.length\"\n                class=\"app-input-info disabled\">no plugins</span>\n        </div>\n        <div class=\"app-input-row\">\n          <label>schema:</label>\n          <select formControlName=\"schema\">\n              <option *ngFor=\"let schema of schemas\" value=\"{{schema.$id}}\">{{schema.$id}}</option>\n          </select>\n        </div>\n      </form>\n      <div class=\"app-column\">\n        <plugin-chooser *ngIf=\"!pluginEditing.pluginId\"\n          (onAdd)=\"pluginSelected($event)\"></plugin-chooser>\n        <plugin-editor [pluginId]=\"pluginEditing.pluginId\"\n          [pluginConfig]=\"pluginEditing.pluginConfig\"\n          [pluginIndex]=\"pluginEditing.index\"></plugin-editor>\n      </div>\n    </div>\n    <div *ngIf=\"!entity\" class=\"app-content-left\">\n      No entity found\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"orders view\">\n  <div class=\"container\">\n    <div *ngIf=\"entity\" class=\"app-content-left\">\n      <header>\n        <h3><span class=\"glyphicon glyphicon-info-sign\"></span>&nbsp;&nbsp;Entity Information</h3>\n      </header>\n      <form [formGroup]=\"entityForm\" class=\"app-column\">\n        <div class=\"app-input-row-huge\">\n          <label>Name</label>\n          <input formControlName=\"name\">\n        </div>\n        <div class=\"app-input-row\">\n          <label>ID</label>\n          <input formControlName=\"_id\">\n        </div>\n        <div class=\"app-input-row-half\">\n          <label>created</label>\n          <span class=\"app-input-info disabled\">{{entityForm.value.crstamp*1000 | date : 'yyyy-MM-dd HH:mm:ss'}}</span>\n        </div>\n        <div class=\"app-input-row-half\">\n          <label>last updated</label>\n          <span class=\"app-input-info disabled\">{{entityForm.value.tstamp*1000 | date : 'yyyy-MM-dd HH:mm:ss'}}</span>\n        </div>\n        <div class=\"app-input-row\">\n          <span *ngIf=\"pluginEditing.index !== null && pluginEditing.pluginId !== null\"\n                (click)=\"addPlugin()\" class=\"app-input-action\">\n            new plugin\n            <span class=\"glyphicon glyphicon-plus\"></span>\n          </span>\n          <span *ngIf=\"pluginEditing.index === null && pluginEditing.pluginId === null\"\n                class=\"app-input-action\">\n            select new plugin ID\n            <span class=\"glyphicon glyphicon-arrow-right\"></span>\n          </span>\n          <span *ngIf=\"pluginEditing.index === null && pluginEditing.pluginId !== null\"\n                class=\"app-input-action\">\n            edit new plugin\n            <span class=\"glyphicon glyphicon-arrow-right\"></span>\n          </span>\n          <label>plugins</label>\n          <ul *ngIf=\"entityForm.value.plugins.length\" class=\"app-input-info\">\n              <li *ngFor=\"let plugin of entityForm.value.plugins; let index = index\">\n                  <span *ngIf=\"index !== pluginEditing.index\"\n                        (click)=\"editPlugin(index, plugin)\"\n                        class=\"app-input-action\">\n                    edit\n                    <span class=\"glyphicon glyphicon-edit\"></span>\n                  </span>\n                  <span *ngIf=\"index === pluginEditing.index\" class=\"app-input-action\">\n                    <span>currently editing</span>\n                    <span class=\"glyphicon glyphicon-arrow-right\"></span>\n                  </span>\n                  <b>{{plugin.pluginId}}</b>\n                  {{plugin.description}}\n              </li>\n          </ul>\n          <span *ngIf=\"!entityForm.value.plugins.length\"\n                class=\"app-input-info disabled\">no plugins</span>\n        </div>\n        <div class=\"app-input-row\">\n          <label>schema</label>\n          <select formControlName=\"schema\">\n              <option *ngFor=\"let schema of schemas\" value=\"{{schema.$id}}\">{{schema.$id}}</option>\n          </select>\n        </div>\n      </form>\n      <div class=\"app-column\">\n        <plugin-chooser *ngIf=\"!pluginEditing.pluginId\"\n          (onAdd)=\"onPluginSelected($event)\"></plugin-chooser>\n        <plugin-editor [pluginId]=\"pluginEditing.pluginId\"\n          [pluginConfig]=\"pluginEditing.pluginConfig\"\n          [pluginIndex]=\"pluginEditing.index\"\n          (onSubmit)=\"onPluginUpdated(pluginEditing.index, $event)\"></plugin-editor>\n      </div>\n    </div>\n    <div *ngIf=\"!entity\" class=\"app-content-left\">\n      No entity found\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -77,13 +77,13 @@ var EntityComponent = (function () {
     function EntityComponent(route, dataService) {
         this.route = route;
         this.dataService = dataService;
-        this.entityForm = new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["c" /* FormGroup */]({
-            _id: new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["b" /* FormControl */](),
-            name: new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["b" /* FormControl */](),
-            crstamp: new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["b" /* FormControl */](),
-            tstamp: new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["b" /* FormControl */](),
-            plugins: new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["b" /* FormControl */](),
-            schema: new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["b" /* FormControl */]()
+        this.entityForm = new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["e" /* FormGroup */]({
+            _id: new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["d" /* FormControl */](),
+            name: new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["d" /* FormControl */](),
+            crstamp: new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["d" /* FormControl */](),
+            tstamp: new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["d" /* FormControl */](),
+            plugins: new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["d" /* FormControl */](),
+            schema: new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["d" /* FormControl */]()
         });
         this.schemas = [];
         this.pluginEditing = {
@@ -113,8 +113,21 @@ var EntityComponent = (function () {
     EntityComponent.prototype.addPlugin = function () {
         this.pluginEditing = __assign({}, this.pluginEditing, { index: null, pluginId: null, pluginConfig: null });
     };
-    EntityComponent.prototype.pluginSelected = function (pluginId) {
+    EntityComponent.prototype.onPluginSelected = function (pluginId) {
         this.pluginEditing = __assign({}, this.pluginEditing, { index: null, pluginId: pluginId, pluginConfig: {} });
+    };
+    EntityComponent.prototype.onPluginUpdated = function (index, newPluginData) {
+        var currentPlugins = this.entityForm.value.plugins;
+        // console.log('currentPlugins', currentPlugins);
+        if (index === null) {
+            currentPlugins.push(newPluginData);
+        }
+        else {
+            currentPlugins[index] = newPluginData;
+        }
+        this.entityForm.patchValue({ plugins: currentPlugins });
+        this.pluginEditing.index = null;
+        this.pluginEditing.pluginId = null;
     };
     EntityComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -139,11 +152,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EntityModule", function() { return EntityModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_shared_module__ = __webpack_require__("../../../../../src/app/shared/shared.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__entity_routing_module__ = __webpack_require__("../../../../../src/app/entity/entity-routing.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__entity_component__ = __webpack_require__("../../../../../src/app/entity/entity.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__plugin_editor_plugin_editor_component__ = __webpack_require__("../../../../../src/app/entity/plugin-editor/plugin-editor.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__plugin_chooser_plugin_chooser_component__ = __webpack_require__("../../../../../src/app/entity/plugin-chooser/plugin-chooser.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angular2_json_schema_form__ = __webpack_require__("../../../../angular2-json-schema-form/angular2-json-schema-form.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__entity_routing_module__ = __webpack_require__("../../../../../src/app/entity/entity-routing.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__entity_component__ = __webpack_require__("../../../../../src/app/entity/entity.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__plugin_editor_plugin_editor_component__ = __webpack_require__("../../../../../src/app/entity/plugin-editor/plugin-editor.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__plugin_chooser_plugin_chooser_component__ = __webpack_require__("../../../../../src/app/entity/plugin-chooser/plugin-chooser.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -158,18 +172,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var EntityModule = (function () {
     function EntityModule() {
     }
     EntityModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
             imports: [
                 __WEBPACK_IMPORTED_MODULE_1__shared_shared_module__["a" /* SharedModule */],
-                __WEBPACK_IMPORTED_MODULE_2__entity_routing_module__["a" /* EntityRoutingModule */],
-                __WEBPACK_IMPORTED_MODULE_4__angular_forms__["d" /* FormsModule */],
-                __WEBPACK_IMPORTED_MODULE_4__angular_forms__["f" /* ReactiveFormsModule */]
+                __WEBPACK_IMPORTED_MODULE_3__entity_routing_module__["a" /* EntityRoutingModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_forms__["g" /* FormsModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_forms__["l" /* ReactiveFormsModule */],
+                __WEBPACK_IMPORTED_MODULE_2_angular2_json_schema_form__["a" /* JsonSchemaFormModule */]
             ],
-            declarations: [__WEBPACK_IMPORTED_MODULE_3__entity_component__["a" /* EntityComponent */], __WEBPACK_IMPORTED_MODULE_5__plugin_editor_plugin_editor_component__["a" /* PluginEditorComponent */], __WEBPACK_IMPORTED_MODULE_6__plugin_chooser_plugin_chooser_component__["a" /* PluginChooserComponent */]]
+            declarations: [__WEBPACK_IMPORTED_MODULE_4__entity_component__["a" /* EntityComponent */], __WEBPACK_IMPORTED_MODULE_6__plugin_editor_plugin_editor_component__["a" /* PluginEditorComponent */], __WEBPACK_IMPORTED_MODULE_7__plugin_chooser_plugin_chooser_component__["a" /* PluginChooserComponent */]]
         })
     ], EntityModule);
     return EntityModule;
@@ -200,7 +216,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/entity/plugin-chooser/plugin-chooser.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n  <label>choose plugin to add:</label>\n  <ul>\n    <li *ngFor=\"let plugin of plugins\"\n      (click)=\"clicked(plugin.$id)\">\n      <b>{{plugin.$id}}</b>\n      {{plugin.description}} &raquo;\n    </li>\n  </ul>\n</div>\n"
+module.exports = "<div class=\"app-topline\">\n  <label>choose plugin to add</label>\n  <ul>\n    <li *ngFor=\"let plugin of plugins\"\n      (click)=\"clicked(plugin.$id)\">\n      <b>{{plugin.$id}}</b>\n      {{plugin.description}} &raquo;\n    </li>\n  </ul>\n</div>\n"
 
 /***/ }),
 
@@ -225,7 +241,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var PluginChooserComponent = (function () {
     function PluginChooserComponent(dataService) {
         this.dataService = dataService;
-        this.onAdd = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["v" /* EventEmitter */]();
+        this.onAdd = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
         this.plugins = [];
     }
     PluginChooserComponent.prototype.ngOnInit = function () {
@@ -239,7 +255,7 @@ var PluginChooserComponent = (function () {
         this.onAdd.emit(pluginId);
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["P" /* Output */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["R" /* Output */])(),
         __metadata("design:type", Object)
     ], PluginChooserComponent.prototype, "onAdd", void 0);
     PluginChooserComponent = __decorate([
@@ -265,7 +281,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "label {\n    font-size: 80%;\n    font-weight: 800;\n}\ntextarea {\n    width: 100%;\n    height: 200px;\n}\n", ""]);
+exports.push([module.i, "label {\n    font-size: 80%;\n    font-weight: 800;\n}\ntextarea {\n    width: 100%;\n    height: 200px;\n}\nlabel.app-toplevel {\n    font-size: 125%;\n}\n", ""]);
 
 // exports
 
@@ -278,7 +294,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/entity/plugin-editor/plugin-editor.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"pluginId\">\n  <label *ngIf=\"pluginIndex !== null\">editing:</label>\n  <label *ngIf=\"pluginIndex === null\">adding new:</label>\n  {{pluginId}} plugin\n  <div *ngIf=\"pluginSchema\">\n    <textarea>{{pluginConfig | json}}</textarea>\n    <pre>{{pluginSchema | json}}</pre>\n  </div>\n  <div *ngIf=\"!pluginSchema\">loading schema...</div>\n</div>\n"
+module.exports = "<div *ngIf=\"pluginId\">\n  <span *ngIf=\"pluginIndex !== null\" class=\"app-topline\">\n    <button (click)=\"onRemoveFn()\">remove plugin</button>\n    <label>editing</label>{{pluginId}} plugin\n  </span>\n  <span *ngIf=\"pluginIndex === null\">\n    <label class=\"app-toplevel\">adding new</label>\n    {{pluginId}} plugin\n  </span>\n  <div *ngIf=\"pluginSchema\" [ngClass]=\"{'app-form-invalid': !isValid}\">\n    <json-schema-form\n      *ngIf=\"pluginSchema\"\n      framework=\"no-framework\"\n      loadExternalAssets=\"true\"\n      [schema]=\"pluginSchema\"\n      [(data)]=\"pluginConfig\"\n      (isValid)=\"isValidFn($event)\"\n      (onSubmit)=\"onSubmitFn()\"\n      ></json-schema-form>\n  </div>\n  <div *ngIf=\"!pluginSchema\">loading schema...</div>\n</div>\n"
 
 /***/ }),
 
@@ -303,6 +319,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var PluginEditorComponent = (function () {
     function PluginEditorComponent(dataService) {
         this.dataService = dataService;
+        this.onSubmit = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
+        this.onRemove = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
+        this.isValid = false;
         this.pluginSchema = null;
     }
     PluginEditorComponent.prototype.ngOnInit = function () {
@@ -320,18 +339,37 @@ var PluginEditorComponent = (function () {
             });
         }
     };
+    PluginEditorComponent.prototype.isValidFn = function (isValid) {
+        this.isValid = isValid;
+    };
+    PluginEditorComponent.prototype.onSubmitFn = function () {
+        if (this.isValid) {
+            this.onSubmit.emit(this.pluginConfig);
+        }
+    };
+    PluginEditorComponent.prototype.onRemoveFn = function () {
+        this.onRemove.emit(this.pluginIndex);
+    };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
         __metadata("design:type", String)
     ], PluginEditorComponent.prototype, "pluginId", void 0);
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
         __metadata("design:type", String)
     ], PluginEditorComponent.prototype, "pluginConfig", void 0);
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
         __metadata("design:type", Number)
     ], PluginEditorComponent.prototype, "pluginIndex", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["R" /* Output */])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */])
+    ], PluginEditorComponent.prototype, "onSubmit", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["R" /* Output */])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */])
+    ], PluginEditorComponent.prototype, "onRemove", void 0);
     PluginEditorComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'plugin-editor',
