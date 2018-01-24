@@ -733,7 +733,7 @@ var ModalService = (function () {
 /***/ "../../../../../src/app/core/navbar/navbar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-inner navbar-fixed-top\">\n    <div class=\"container\">\n        <div class=\"navbar-header\" style=\"\">\n            <button type=\"button\" class=\"navbar-toggle\"\n                    (click)=\"isCollapsed = !isCollapsed\">\n                <span class=\"sr-only\">Toggle navigation</span>\n                <span class=\"icon-bar\"></span>\n                <span class=\"icon-bar\"></span>\n                <span class=\"icon-bar\"></span>\n            </button>\n            <a class=\"navbar-brand\" routerLink=\"/customers\">\n                <img src=\"assets/images/people.png\" alt=\"logo\" />\n                <span class=\"app-title\">Customer Manager</span>\n            </a>\n            <span class=\"navbar-collapse\" [attr.data-collapse]=\"isCollapsed\">\n                <ul class=\"nav navbar-nav nav-pills navBarPadding\">\n                    <li routerLinkActive=\"active\"><a routerLink=\"/entities\">Entities</a></li>\n                    <li routerLinkActive=\"active\"><a routerLink=\"/customers\">Customers</a></li>\n                    <li routerLinkActive=\"active\"><a routerLink=\"/orders\">Orders</a></li>\n                    <li routerLinkActive=\"active\"><a routerLink=\"/about\">About</a></li>\n                    <li routerLinkActive=\"active\" (click)=\"loginOrOut()\"><a>{{ loginLogoutText }}</a></li>\n                </ul>\n            </span>\n        </div>\n    </div>\n</nav>\n"
+module.exports = "<nav class=\"navbar navbar-inner navbar-fixed-top\">\n    <div class=\"container\">\n        <div class=\"navbar-header\" style=\"\">\n            <button type=\"button\" class=\"navbar-toggle\"\n                    (click)=\"isCollapsed = !isCollapsed\">\n                <span class=\"sr-only\">Toggle navigation</span>\n                <span class=\"icon-bar\"></span>\n                <span class=\"icon-bar\"></span>\n                <span class=\"icon-bar\"></span>\n            </button>\n            <a class=\"navbar-brand\" routerLink=\"/customers\">\n                <i class=\"glyphicon glyphicon-wrench\"></i>\n                <span class=\"app-title\">UniApi config manager</span>\n            </a>\n            <span class=\"navbar-collapse\" [attr.data-collapse]=\"isCollapsed\">\n                <ul class=\"nav navbar-nav nav-pills navBarPadding\">\n                    <li routerLinkActive=\"active\"><a routerLink=\"/entities\">Entities</a></li>\n                    <!--<li routerLinkActive=\"active\"><a routerLink=\"/customers\">Customers</a></li>-->\n                    <!--<li routerLinkActive=\"active\"><a routerLink=\"/orders\">Orders</a></li>-->\n                    <li routerLinkActive=\"active\"><a routerLink=\"/about\">About</a></li>\n                    <li routerLinkActive=\"active\" (click)=\"loginOrOut()\"><a>{{ loginLogoutText }}</a></li>\n                </ul>\n            </span>\n        </div>\n    </div>\n</nav>\n"
 
 /***/ }),
 
@@ -1126,6 +1126,7 @@ var AuthService = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__("../../../../rxjs/_esm5/Observable.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_operators__ = __webpack_require__("../../../../rxjs/_esm5/operators.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__growler_growler_service__ = __webpack_require__("../../../../../src/app/core/growler/growler.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1139,9 +1140,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var DataService = (function () {
-    function DataService(http) {
+    function DataService(http, growler) {
         this.http = http;
+        this.growler = growler;
         this.entityBaseUrl = '/config/entity';
         this.schemaBaseUrl = '/config/schema';
         this.pluginBaseUrl = '/config/plugin';
@@ -1153,6 +1156,32 @@ var DataService = (function () {
     };
     DataService.prototype.getEntity = function (id) {
         return this.http.get(this.entityBaseUrl + '/' + id);
+    };
+    DataService.prototype.insertEntity = function (entity, defaultErrorMessage, entityForm) {
+        return this.http.post(this.entityBaseUrl + '/', entity);
+    };
+    DataService.prototype.updateEntity = function (oldId, entity, defaultErrorMessage, entityForm) {
+        var _this = this;
+        return this.http.put(this.entityBaseUrl + '/' + oldId, entity)
+            .pipe(Object(__WEBPACK_IMPORTED_MODULE_3_rxjs_operators__["map"])(function (response) {
+            if (!response.ok) {
+                _this.handleUniApiError(response, defaultErrorMessage, entityForm);
+            }
+            else if (entityForm) {
+                entityForm.patchValue(response.result);
+                entityForm.markAsPristine();
+            }
+            return response;
+        }), 
+        // catchError(this.handleUniApiError)
+        Object(__WEBPACK_IMPORTED_MODULE_3_rxjs_operators__["catchError"])(function (response) {
+            _this.handleUniApiError(response, defaultErrorMessage, entityForm);
+            return __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["a" /* Observable */].throw(response);
+        }));
+    };
+    DataService.prototype.deleteEntity = function (id) {
+        return this.http.delete(this.entityBaseUrl + '/' + id)
+            .pipe(Object(__WEBPACK_IMPORTED_MODULE_3_rxjs_operators__["map"])(function (res) { return res.status; }), Object(__WEBPACK_IMPORTED_MODULE_3_rxjs_operators__["catchError"])(this.handleError));
     };
     DataService.prototype.getSchemas = function () {
         return this.http.get(this.schemaBaseUrl);
@@ -1221,6 +1250,12 @@ var DataService = (function () {
         }
         return __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["a" /* Observable */].throw(error || 'Node.js server error');
     };
+    DataService.prototype.handleUniApiError = function (response, defaultErrorMessage, entityForm) {
+        if (entityForm) {
+            entityForm.setErrors(response.error);
+        }
+        this.growler.growl(response.errorMessage || defaultErrorMessage || 'API responded with errors', __WEBPACK_IMPORTED_MODULE_4__growler_growler_service__["a" /* GrowlerMessageType */].Danger);
+    };
     DataService.prototype.calculateCustomersOrderTotal = function (customers) {
         for (var _i = 0, customers_1 = customers; _i < customers_1.length; _i++) {
             var customer = customers_1[_i];
@@ -1236,7 +1271,8 @@ var DataService = (function () {
     };
     DataService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["b" /* HttpClient */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["b" /* HttpClient */],
+            __WEBPACK_IMPORTED_MODULE_4__growler_growler_service__["b" /* GrowlerService */]])
     ], DataService);
     return DataService;
 }());

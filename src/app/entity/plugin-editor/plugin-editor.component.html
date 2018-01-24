@@ -13,7 +13,7 @@
     </div>
     <span>adding new</span>
   </span>
-  <div *ngIf="pluginSchema" [ngClass]="{'app-form-invalid': !isValid}">
+  <div *ngIf="pluginSchema" [class.app-form-invalid]="!isValid">
     <json-schema-form
       *ngIf="pluginSchema"
       framework="no-framework"

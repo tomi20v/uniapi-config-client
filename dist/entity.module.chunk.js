@@ -39,7 +39,7 @@ var EntityRoutingModule = (function () {
 /***/ "../../../../../src/app/entity/entity.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"orders view\">\n  <div class=\"container\">\n    <div *ngIf=\"entity\" class=\"app-content-left\">\n      <header>\n        <h3><span class=\"glyphicon glyphicon-info-sign\"></span>&nbsp;&nbsp;Entity Information</h3>\n      </header>\n      <form [formGroup]=\"entityForm\" class=\"app-column\">\n        <div class=\"app-input-row-huge\">\n          <label>Name</label>\n          <input formControlName=\"name\">\n        </div>\n        <div class=\"app-input-row\">\n          <label>ID</label>\n          <input formControlName=\"_id\">\n        </div>\n        <div class=\"app-input-row-half\">\n          <label>created</label>\n          <span class=\"app-input-info disabled\">{{entityForm.value.crstamp*1000 | date : 'yyyy-MM-dd HH:mm:ss'}}</span>\n        </div>\n        <div class=\"app-input-row-half\">\n          <label>last updated</label>\n          <span class=\"app-input-info disabled\">{{entityForm.value.tstamp*1000 | date : 'yyyy-MM-dd HH:mm:ss'}}</span>\n        </div>\n        <div class=\"app-input-row\">\n          <span *ngIf=\"pluginEditing.index !== null && pluginEditing.pluginId !== null\"\n                (click)=\"addPlugin()\" class=\"app-input-action\">\n            new plugin\n            <span class=\"glyphicon glyphicon-plus\"></span>\n          </span>\n          <span *ngIf=\"pluginEditing.index === null && pluginEditing.pluginId === null\"\n                class=\"app-input-action\">\n            select new plugin ID\n            <span class=\"glyphicon glyphicon-arrow-right\"></span>\n          </span>\n          <span *ngIf=\"pluginEditing.index === null && pluginEditing.pluginId !== null\"\n                class=\"app-input-action\">\n            edit new plugin\n            <span class=\"glyphicon glyphicon-arrow-right\"></span>\n          </span>\n          <label>plugins</label>\n          <ul *ngIf=\"entityForm.value.plugins.length\" class=\"app-input-info\">\n              <li *ngFor=\"let plugin of entityForm.value.plugins; let index = index\">\n                  <span *ngIf=\"index !== pluginEditing.index\"\n                        (click)=\"editPlugin(index, plugin)\"\n                        class=\"app-input-action\">\n                    edit\n                    <span class=\"glyphicon glyphicon-edit\"></span>\n                  </span>\n                  <span *ngIf=\"index === pluginEditing.index\" class=\"app-input-action\">\n                    <span>currently editing</span>\n                    <span class=\"glyphicon glyphicon-arrow-right\"></span>\n                  </span>\n                  <b>{{plugin.pluginId}}</b>\n                  {{plugin.description}}\n              </li>\n          </ul>\n          <span *ngIf=\"!entityForm.value.plugins.length\"\n                class=\"app-input-info disabled\">no plugins</span>\n        </div>\n        <div class=\"app-input-row\">\n          <label>schema</label>\n          <select formControlName=\"schema\">\n              <option *ngFor=\"let schema of schemas\" value=\"{{schema.$id}}\">{{schema.$id}}</option>\n          </select>\n        </div>\n      </form>\n      <div class=\"app-column\">\n        <plugin-chooser *ngIf=\"!pluginEditing.pluginId\"\n          (onAdd)=\"onPluginSelected($event)\"></plugin-chooser>\n        <plugin-editor [pluginId]=\"pluginEditing.pluginId\"\n          [pluginConfig]=\"pluginEditing.pluginConfig\"\n          [pluginIndex]=\"pluginEditing.index\"\n          (onSubmit)=\"onPluginUpdated(pluginEditing.index, $event)\"></plugin-editor>\n      </div>\n    </div>\n    <div *ngIf=\"!entity\" class=\"app-content-left\">\n      No entity found\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"orders view\">\n  <div class=\"container\">\n    <div *ngIf=\"entity\" class=\"app-content-left\">\n      <header>\n        <h3>\n          <span *ngIf=\"hasChanges()\" class=\"app-unsaved\">has changes</span>\n          <span class=\"glyphicon glyphicon-info-sign\"></span>\n          &nbsp;&nbsp;Entity editor\n        </h3>\n      </header>\n      <form [formGroup]=\"entityForm\" class=\"app-column\">\n        <div class=\"app-input-row-huge\">\n          <label>Name</label>\n          <input formControlName=\"name\">\n        </div>\n        <div class=\"app-input-row\">\n          <label>ID</label>\n          <input formControlName=\"_id\">\n        </div>\n        <div class=\"app-input-row-half\">\n          <label>created</label>\n          <span class=\"app-input-info disabled\">{{entityForm.value.crstamp*1000 | date : 'yyyy-MM-dd HH:mm:ss'}}</span>\n        </div>\n        <div class=\"app-input-row-half\">\n          <label>last updated</label>\n          <span class=\"app-input-info disabled\">{{entityForm.value.tstamp*1000 | date : 'yyyy-MM-dd HH:mm:ss'}}</span>\n        </div>\n        <div class=\"app-input-row\">\n          <span *ngIf=\"pluginEditing.index !== null && pluginEditing.pluginId !== null\"\n                (click)=\"onAddPlugin()\" class=\"app-input-action\">\n            new plugin\n            <span class=\"glyphicon glyphicon-plus\"></span>\n          </span>\n          <span *ngIf=\"pluginEditing.index === null && pluginEditing.pluginId === null\"\n                class=\"app-input-action\">\n            select new plugin ID\n            <span class=\"glyphicon glyphicon-arrow-right\"></span>\n          </span>\n          <span *ngIf=\"pluginEditing.index === null && pluginEditing.pluginId !== null\"\n                class=\"app-input-action\">\n            edit new plugin\n            <span class=\"glyphicon glyphicon-arrow-right\"></span>\n          </span>\n          <label>plugins</label>\n          <ul *ngIf=\"entityForm.value.plugins.length\" class=\"app-input-info\">\n              <li *ngFor=\"let plugin of entityForm.value.plugins; let index = index\">\n                  <span *ngIf=\"index !== pluginEditing.index\"\n                        (click)=\"editPlugin(index, plugin)\"\n                        class=\"app-input-action\">\n                    edit\n                    <span class=\"glyphicon glyphicon-edit\"></span>\n                  </span>\n                  <span *ngIf=\"index === pluginEditing.index\" class=\"app-input-action\">\n                    <span>currently editing</span>\n                    <span class=\"glyphicon glyphicon-arrow-right\"></span>\n                  </span>\n                  <b>{{plugin.pluginId}}</b>\n                  {{plugin.description}}\n              </li>\n          </ul>\n          <span *ngIf=\"!entityForm.value.plugins.length\"\n                class=\"app-input-info disabled\">no plugins</span>\n        </div>\n        <div class=\"app-input-row\">\n          <label>schema</label>\n          <select formControlName=\"schema\">\n              <option *ngFor=\"let schema of schemas\" value=\"{{schema.$id}}\">{{schema.$id}}</option>\n          </select>\n        </div>\n        <div>\n          <input type=\"submit\"\n                 (click)=\"onSubmit()\"\n                 value=\"save entity\"\n                 class=\"app-submit\"\n                 [disabled]=\"!hasChanges()\"/>\n        </div>\n      </form>\n      <div class=\"app-column\">\n        <plugin-chooser *ngIf=\"!pluginEditing.pluginId\"\n          (onAdd)=\"onPluginSelected($event)\"></plugin-chooser>\n        <plugin-editor [pluginId]=\"pluginEditing.pluginId\"\n          [pluginConfig]=\"pluginEditing.pluginConfig\"\n          [pluginIndex]=\"pluginEditing.index\"\n          (onSubmit)=\"onPluginUpdated(pluginEditing.index, $event)\"\n          (onRemove)=\"onPluginRemoved($event)\"\n        ></plugin-editor>\n      </div>\n    </div>\n    <div *ngIf=\"!entity\" class=\"app-content-left\">\n      No entity found\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -52,6 +52,7 @@ module.exports = "<div class=\"orders view\">\n  <div class=\"container\">\n    
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_services_data_service__ = __webpack_require__("../../../../../src/app/core/services/data.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__core_growler_growler_service__ = __webpack_require__("../../../../../src/app/core/growler/growler.service.ts");
 var __assign = (this && this.__assign) || Object.assign || function(t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
         s = arguments[i];
@@ -73,10 +74,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var EntityComponent = (function () {
-    function EntityComponent(route, dataService) {
+    function EntityComponent(route, dataService, growler) {
         this.route = route;
         this.dataService = dataService;
+        this.growler = growler;
         this.entityForm = new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["e" /* FormGroup */]({
             _id: new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["d" /* FormControl */](),
             name: new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["d" /* FormControl */](),
@@ -100,6 +103,8 @@ var EntityComponent = (function () {
                 .subscribe(function (entity) {
                 _this.entity = entity;
                 _this.entityForm.patchValue(entity);
+                // this.editingMode = true;
+                _this.entityForm.controls._id.disable();
             });
         });
         this.dataService.getSchemas()
@@ -110,15 +115,18 @@ var EntityComponent = (function () {
     EntityComponent.prototype.editPlugin = function (index, pluginConfig) {
         this.pluginEditing = __assign({}, this.pluginEditing, { index: index, pluginId: pluginConfig.pluginId, pluginConfig: pluginConfig });
     };
-    EntityComponent.prototype.addPlugin = function () {
-        this.pluginEditing = __assign({}, this.pluginEditing, { index: null, pluginId: null, pluginConfig: null });
+    EntityComponent.prototype.onAddPlugin = function () {
+        this.initPluginEditing();
     };
     EntityComponent.prototype.onPluginSelected = function (pluginId) {
-        this.pluginEditing = __assign({}, this.pluginEditing, { index: null, pluginId: pluginId, pluginConfig: {} });
+        this.pluginEditing = {
+            index: null,
+            pluginId: pluginId,
+            pluginConfig: {}
+        };
     };
     EntityComponent.prototype.onPluginUpdated = function (index, newPluginData) {
         var currentPlugins = this.entityForm.value.plugins;
-        // console.log('currentPlugins', currentPlugins);
         if (index === null) {
             currentPlugins.push(newPluginData);
         }
@@ -126,8 +134,55 @@ var EntityComponent = (function () {
             currentPlugins[index] = newPluginData;
         }
         this.entityForm.patchValue({ plugins: currentPlugins });
+        this.entityForm.markAsDirty();
         this.pluginEditing.index = null;
         this.pluginEditing.pluginId = null;
+    };
+    EntityComponent.prototype.onPluginRemoved = function (index) {
+        if (index !== null) {
+            var currentPlugins = this.entityForm.value.plugins;
+            currentPlugins.splice(index, 1);
+            this.entityForm.patchValue({ plugins: currentPlugins });
+            this.entityForm.markAsDirty();
+        }
+        this.initPluginEditing();
+    };
+    EntityComponent.prototype.onSubmit = function () {
+        var _this = this;
+        if (this.entity._id === null) {
+            if (0)
+                this.dataService.insertEntity(this.entityForm.value, null, this.entityForm)
+                    .subscribe(function (insertedEntity) {
+                    if (insertedEntity) {
+                        _this.entity = insertedEntity;
+                        // this.entityForm.patchValue(insertedEntity);
+                        _this.initPluginEditing();
+                    }
+                    else {
+                        _this.growler.growl('Error inserting', GrowlerMessageType.Danger);
+                    }
+                }, function (err) { return console.log(err); });
+        }
+        else {
+            this.dataService.updateEntity(this.entity._id, this.entityForm.value, null, this.entityForm)
+                .subscribe(function (response) {
+                if (response.ok) {
+                    _this.entity = _this.entityForm.value;
+                    _this.initPluginEditing();
+                }
+            }, function (response) { return console.log('erro response:', response); });
+        }
+    };
+    EntityComponent.prototype.hasChanges = function () {
+        // @todo should rather compare loaded and current value
+        return this.entityForm.dirty;
+    };
+    EntityComponent.prototype.initPluginEditing = function () {
+        this.pluginEditing = {
+            index: null,
+            pluginId: null,
+            pluginConfig: null
+        };
     };
     EntityComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -135,7 +190,8 @@ var EntityComponent = (function () {
             template: __webpack_require__("../../../../../src/app/entity/entity.component.html")
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */],
-            __WEBPACK_IMPORTED_MODULE_1__core_services_data_service__["a" /* DataService */]])
+            __WEBPACK_IMPORTED_MODULE_1__core_services_data_service__["a" /* DataService */],
+            __WEBPACK_IMPORTED_MODULE_4__core_growler_growler_service__["b" /* GrowlerService */]])
     ], EntityComponent);
     return EntityComponent;
 }());
@@ -216,7 +272,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/entity/plugin-chooser/plugin-chooser.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"app-topline\">\n  <label>choose plugin to add</label>\n  <ul>\n    <li *ngFor=\"let plugin of plugins\"\n      (click)=\"clicked(plugin.$id)\">\n      <b>{{plugin.$id}}</b>\n      {{plugin.description}} &raquo;\n    </li>\n  </ul>\n</div>\n"
+module.exports = "<div class=\"app-topline\">\n  <span>choose plugin to add</span>\n  <ul>\n    <li *ngFor=\"let plugin of plugins\"\n      (click)=\"clicked(plugin.$id)\">\n      <b>{{plugin.$id}}</b>\n      {{plugin.description}} &raquo;\n    </li>\n  </ul>\n</div>\n"
 
 /***/ }),
 
@@ -294,7 +350,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/entity/plugin-editor/plugin-editor.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"pluginId\">\n  <span *ngIf=\"pluginIndex !== null\" class=\"app-topline\">\n    <button (click)=\"onRemoveFn()\">remove plugin</button>\n    <label>editing</label>{{pluginId}} plugin\n  </span>\n  <span *ngIf=\"pluginIndex === null\">\n    <label class=\"app-toplevel\">adding new</label>\n    {{pluginId}} plugin\n  </span>\n  <div *ngIf=\"pluginSchema\" [ngClass]=\"{'app-form-invalid': !isValid}\">\n    <json-schema-form\n      *ngIf=\"pluginSchema\"\n      framework=\"no-framework\"\n      loadExternalAssets=\"true\"\n      [schema]=\"pluginSchema\"\n      [(data)]=\"pluginConfig\"\n      (isValid)=\"isValidFn($event)\"\n      (onSubmit)=\"onSubmitFn()\"\n      ></json-schema-form>\n  </div>\n  <div *ngIf=\"!pluginSchema\">loading schema...</div>\n</div>\n"
+module.exports = "<div *ngIf=\"pluginId\">\n  <span *ngIf=\"pluginIndex !== null\" class=\"app-topline\">\n    <div (click)=\"onRemoveFn()\" class=\"app-input-action\">\n      remove plugin\n      <i class=\"glyphicon glyphicon-remove\"></i>\n    </div>\n    <span>editing</span>\n  </span>\n  <span *ngIf=\"pluginIndex === null\" class=\"app-topline\">\n    <div (click)=\"onRemoveFn()\" class=\"app-input-action\">\n      cancel\n      <i class=\"glyphicon glyphicon-remove\"></i>\n    </div>\n    <span>adding new</span>\n  </span>\n  <div *ngIf=\"pluginSchema\" [class.app-form-invalid]=\"!isValid\">\n    <json-schema-form\n      *ngIf=\"pluginSchema\"\n      framework=\"no-framework\"\n      loadExternalAssets=\"true\"\n      [schema]=\"pluginSchema\"\n      [(data)]=\"pluginConfig\"\n      (isValid)=\"isValidFn($event)\"\n      (onSubmit)=\"onSubmitFn()\"\n      ></json-schema-form>\n  </div>\n  <div *ngIf=\"!pluginSchema\">loading schema...</div>\n</div>\n"
 
 /***/ }),
 

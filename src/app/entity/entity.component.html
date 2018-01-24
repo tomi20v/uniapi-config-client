@@ -2,7 +2,11 @@
   <div class="container">
     <div *ngIf="entity" class="app-content-left">
       <header>
-        <h3><span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;Entity Information</h3>
+        <h3>
+          <span *ngIf="hasChanges()" class="app-unsaved">has changes</span>
+          <span class="glyphicon glyphicon-info-sign"></span>
+          &nbsp;&nbsp;Entity editor
+        </h3>
       </header>
       <form [formGroup]="entityForm" class="app-column">
         <div class="app-input-row-huge">
@@ -62,6 +66,13 @@
           <select formControlName="schema">
               <option *ngFor="let schema of schemas" value="{{schema.$id}}">{{schema.$id}}</option>
           </select>
+        </div>
+        <div>
+          <input type="submit"
+                 (click)="onSubmit()"
+                 value="save entity"
+                 class="app-submit"
+                 [disabled]="!hasChanges()"/>
         </div>
       </form>
       <div class="app-column">

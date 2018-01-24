@@ -1,4 +1,5 @@
 'use strict';
+
 var express     = require('express'),
     bodyParser  = require('body-parser'),
     fs          = require('fs'),
@@ -20,15 +21,58 @@ app.get('/config/entity', (req, res) => {
 });
 
 app.get('/config/entity/:id', (req, res) => {
-    const id = req.params.id;
-    let ret = null;
-    for (const entity of entities) {
-        if (entity._id === id) {
-            ret = entity;
-            break;
-        }
+  const id = req.params.id;
+  let ret = null;
+  for (const entity of entities) {
+    if (entity._id === id) {
+    ret = entity;
+    break;
     }
-    res.json(ret);
+  }
+  res.json(ret);
+});
+
+function createId() {
+  return (m = Math, d = Date, h = 16, s = s => m.floor(s).toString(h)) =>
+    s(d.now() / 1000) + ' '.repeat(h).replace(/./g, () => s(m.random() * h));
+}
+
+app.post('/config/entity', (req, res) => {
+  let putData = req.body;
+  let found = false;
+  putData._id = createId();
+  entities.forEach((eachEntity) => {
+    found = found || (eachEntity._id == putData._id);
+  });
+  if (!found) {
+    entities.push(putData);
+  }
+  res.json(found
+    ? {
+      ok: false,
+      error: [
+        {}
+      ]
+    }
+    : {
+      ok: true,
+      result: putData
+    }
+  );
+});
+
+app.put('/config/entity/:id', (req, res) => {
+  const putData = req.body;
+  const id = putData._id;
+  for (let i = 0, len = entities.length; i < len; i++) {
+    if (entities[i]._id == id) {
+      entities[i] = putData;
+    }
+  }
+  res.json({
+    ok: true,
+    result: putData
+  });
 });
 
 app.get('/config/schema', (req, res) => {

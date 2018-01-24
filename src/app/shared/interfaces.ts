@@ -2,18 +2,18 @@ import { ModuleWithProviders } from '@angular/core';
 import { Routes } from '@angular/router';
 
 export interface IEntity {
-    _id: string,
-    name: string
+    _id: string;
+    name: string;
 }
 
 export interface ISchema {
-    $id: string,
-    description?: string
+    $id: string;
+    description?: string;
 }
 
 export interface IPlugin {
-    $id: string,
-    title?: string
+    $id: string;
+    title?: string;
 }
 
 export interface ICustomer {
@@ -59,4 +59,15 @@ export interface IUserLogin {
 export interface IApiResponse {
     status: boolean;
     error?: string;
+}
+
+export interface IUniApiResponse<T> {
+    ok: boolean;
+    result?: T;
+    error?: IUniApiErrors;
+    errorMessage?: string;
+}
+
+export interface IUniApiErrors {
+    [key: string]: string[];
 }
