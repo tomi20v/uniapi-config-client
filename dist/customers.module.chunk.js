@@ -51,7 +51,7 @@ var CustomersCardComponent = (function () {
     CustomersCardComponent.prototype.ngOnInit = function () {
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
         __metadata("design:type", Array)
     ], CustomersCardComponent.prototype, "customers", void 0);
     CustomersCardComponent = __decorate([
@@ -130,7 +130,7 @@ var CustomersGridComponent = (function () {
         this.sorterService.sort(this.customers, prop);
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
         __metadata("design:type", Array)
     ], CustomersGridComponent.prototype, "customers", void 0);
     CustomersGridComponent = __decorate([
@@ -181,7 +181,7 @@ var CustomersRoutingModule = (function () {
     }
     CustomersRoutingModule.components = [__WEBPACK_IMPORTED_MODULE_2__customers_component__["a" /* CustomersComponent */], __WEBPACK_IMPORTED_MODULE_3__customers_card_component__["a" /* CustomersCardComponent */], __WEBPACK_IMPORTED_MODULE_4__customers_grid_component__["a" /* CustomersGridComponent */]];
     CustomersRoutingModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
             imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["d" /* RouterModule */].forChild(routes)],
             exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["d" /* RouterModule */]]
         })
@@ -302,7 +302,7 @@ var CustomersModule = (function () {
     function CustomersModule() {
     }
     CustomersModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
             imports: [__WEBPACK_IMPORTED_MODULE_2__customers_routing_module__["a" /* CustomersRoutingModule */], __WEBPACK_IMPORTED_MODULE_1__shared_shared_module__["a" /* SharedModule */]],
             declarations: [__WEBPACK_IMPORTED_MODULE_2__customers_routing_module__["a" /* CustomersRoutingModule */].components]
         })

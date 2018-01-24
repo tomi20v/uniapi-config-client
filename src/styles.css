@@ -7,11 +7,17 @@
 .app-content-left {
     float: left;
     width: 83.3%;
-    padding-left: 20px;
+}
+.app-content-left .app-unsaved-label {
+    color: red;
+    font-size: 40%;
+    top: -8px;
+    position: relative;
 }
 .app-input-row,
-.app-input-row-huge,
-.app-input-row-half {
+    .app-input-row-huge,
+    .app-input-row-half,
+    select-widget-widget>*>div {
     margin-top: 5px;
     margin-bottom: 10px;
     clear: both;
@@ -26,24 +32,98 @@
     clear: none;
 }
 .app-input-row label,
-.app-input-row-huge label,
-.app-input-row-half label {
+    .app-input-row-huge label,
+    .app-input-row-half label,
+    select-widget-widget label {
     font-size: 80%;
     margin-bottom: 0;
     float: left;
+    text-transform: lowercase;
 }
-.app-input-row input, .app-input-row-huge input {
+select-widget-widget checkbox-widget label {
+    margin-top: 8px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid gray;
+    padding-right: 10px;
+}
+.app-column label:after {
+    content: ":";
+}
+.app-input-row input,
+    .app-input-row select,
+    .app-input-row-huge input,
+    select-widget-widget input,
+    select-widget-widget select {
     border: none;
     border-bottom: 2px solid gray;
+    background: none;
     width: 100%;
 }
-.app-input-row input:focus, .app-input-row-huge input:focus {
+select-widget-widget checkbox-widget input {
+    float: left;
+    width: 17px;
+    height: 17px;
+    top: -5px;
+    position: relative;
+    margin-right: 4px !important;
+}
+submit-widget input {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.app-input-row input:focus,
+    .app-input-row select:focus,
+    .app-input-row-huge input:focus,
+    select-widget-widget input:focus,
+    select-widget-widget select:focus {
     outline: none;
 }
 .app-input-row-huge input {
     font-size: 18px;
 }
-.app-input-info {
+.app-input-row .ng-invalid,
+.app-input-row-huge .ng-invalid,
+select-widget-widget input.ng-invalid,
+select-widget-widget select.ng-invalid {
+    border-color: red;
+}
+    .app-input-row .ng-invalid:after,
+.app-input-row-huge .ng-invalid:after,
+select-widget-widget input.ng-invalid:after,
+select-widget-widget select.ng-invalid:after {
+    color: red;
+    content: "*";
+}
+.app-input-row .app-chooser-list {
+    width: 100%;
+    padding-left: 25px;
+    clear: both;
+}
+.app-form-invalid submit-widget input {
+    background-color: lightgray;
+    cursor: initial;
+}
+.app-input-info{
     width: 100%;
     clear: both;
     display: block;
@@ -69,8 +149,45 @@ ul.app-input-info >li:hover {
 }
 .app-input-action {
     float: right;
+    font-size: 80%;
 }
 .app-input-action:hover {
     color: blue;
     cursor: pointer;
+}
+.app-content-left>.app-column {
+    width: 45%;
+    float: left;
+    margin-right: 4%;
+}
+.app-topline>span {
+    font-size: 125%;
+}
+input.app-submit {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+input.app-submit:disabled {
+    background-color: lightgray;
+    cursor: initial;
 }

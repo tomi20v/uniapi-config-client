@@ -35,7 +35,7 @@ var CanActivateGuard = (function () {
         return false;
     };
     CanActivateGuard = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__core_services_auth_service__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */]])
     ], CanActivateGuard);
     return CanActivateGuard;
@@ -67,7 +67,7 @@ var CanDeactivateGuard = (function () {
         return component.canDeactivate();
     };
     CanDeactivateGuard = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])()
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])()
     ], CanDeactivateGuard);
     return CanDeactivateGuard;
 }());
@@ -311,8 +311,8 @@ var CustomerEditComponent = (function () {
         return this.modalService.show(modalContent);
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_9" /* ViewChild */])('customerForm'),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_2__angular_forms__["e" /* NgForm */])
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_12" /* ViewChild */])('customerForm'),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_2__angular_forms__["k" /* NgForm */])
     ], CustomerEditComponent.prototype, "customerForm", void 0);
     CustomerEditComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -440,7 +440,7 @@ var CustomerRoutingModule = (function () {
     }
     CustomerRoutingModule.components = [__WEBPACK_IMPORTED_MODULE_2__customer_component__["a" /* CustomerComponent */], __WEBPACK_IMPORTED_MODULE_3__customer_orders_component__["a" /* CustomerOrdersComponent */], __WEBPACK_IMPORTED_MODULE_4__customer_details_component__["a" /* CustomerDetailsComponent */], __WEBPACK_IMPORTED_MODULE_5__customer_edit_component__["a" /* CustomerEditComponent */]];
     CustomerRoutingModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
             imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["d" /* RouterModule */].forChild(routes)],
             exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["d" /* RouterModule */]],
             providers: [__WEBPACK_IMPORTED_MODULE_6__can_activate_guard__["a" /* CanActivateGuard */], __WEBPACK_IMPORTED_MODULE_7__can_deactivate_guard__["a" /* CanDeactivateGuard */]]
@@ -540,7 +540,7 @@ var CustomerModule = (function () {
     function CustomerModule() {
     }
     CustomerModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
             imports: [__WEBPACK_IMPORTED_MODULE_2__customer_routing_module__["a" /* CustomerRoutingModule */], __WEBPACK_IMPORTED_MODULE_1__shared_shared_module__["a" /* SharedModule */]],
             declarations: [__WEBPACK_IMPORTED_MODULE_2__customer_routing_module__["a" /* CustomerRoutingModule */].components]
         })

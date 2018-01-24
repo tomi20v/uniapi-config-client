@@ -4,26 +4,100 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { map, catchError } from 'rxjs/operators';
 
-import {ICustomer, IOrder, IState, IPagedResults, IApiResponse, IEntity} from '../../shared/interfaces';
+import {ICustomer, IOrder, IState, IPagedResults, IApiResponse, IEntity, ISchema, IPlugin, IUniApiResponse} from '../../shared/interfaces';
+import {FormGroup} from '@angular/forms';
+import {GrowlerMessageType, GrowlerService} from '../growler/growler.service';
 
 @Injectable()
 export class DataService {
 
-    entityBaseUrl: string = '/config/entity';
-    customersBaseUrl: string = '/api/customers';
-    ordersBaseUrl: string = '/api/orders';
-    orders: IOrder[];
-    states: IState[];
+  entityBaseUrl: string = '/config/entity';
+  schemaBaseUrl: string = '/config/schema';
+  pluginBaseUrl: string = '/config/plugin';
+  customersBaseUrl: string = '/api/customers';
+  ordersBaseUrl: string = '/api/orders';
+  orders: IOrder[];
+  states: IState[];
 
-    constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private growler: GrowlerService
+  ) { }
 
-    getEntities(): Observable<IEntity[]> {
-        return this.http.get<IEntity[]>(this.entityBaseUrl);
-    }
+  getEntities(): Observable<IEntity[]> {
+    return this.http.get<IEntity[]>(this.entityBaseUrl);
+  }
 
-    getEntity(id: string): Observable<IEntity> {
-      return this.http.get<IEntity>(this.entityBaseUrl + '/' + id);
-    }
+  getEntity(id: string): Observable<IEntity> {
+    return this.http.get<IEntity>(this.entityBaseUrl + '/' + id);
+  }
+
+  insertEntity(
+    entity: IEntity,
+    defaultErrorMessage?: string,
+    entityForm?: FormGroup
+  ): Observable<IEntity> {
+    return this.http.post<IEntity>(this.entityBaseUrl + '/', entity)
+      // .pipe(
+      //   map((response: IUniApiResponse<IEntity>) => {
+      //
+      //   }),
+      //   catchError(this.handleError)
+      // )
+    ;
+  }
+
+  updateEntity(
+    oldId: string,
+    entity: IEntity,
+    defaultErrorMessage?: string,
+    entityForm?: FormGroup
+  ): Observable<IUniApiResponse<IEntity>> {
+
+    return this.http.put<IUniApiResponse<IEntity>>(this.entityBaseUrl + '/' + oldId, entity)
+      .pipe(
+        map((response: IUniApiResponse<IEntity>): IUniApiResponse<IEntity> => {
+          if (!response.ok) {
+            this.handleUniApiError(response, defaultErrorMessage, entityForm);
+          }
+          else if (entityForm) {
+            entityForm.patchValue(response.result);
+            entityForm.markAsPristine();
+          }
+          return response;
+        }),
+        // catchError(this.handleUniApiError)
+        catchError((response: HttpErrorResponse) => {
+          this.handleUniApiError(response, defaultErrorMessage, entityForm);
+          return Observable.throw(response);
+        })
+      )
+    ;
+  }
+
+  deleteEntity(id: string): Observable<boolean> {
+    return this.http.delete<IApiResponse>(this.entityBaseUrl + '/' + id)
+      .pipe(
+        map(res => res.status),
+        catchError(this.handleError)
+      );
+  }
+
+  getSchemas(): Observable<ISchema[]> {
+    return this.http.get<ISchema[]>(this.schemaBaseUrl);
+  }
+
+  getSchema(id: string): Observable<ISchema> {
+    return this.http.get<ISchema>(this.schemaBaseUrl + '/' + id);
+  }
+
+  getPlugins(): Observable<IPlugin[]> {
+    return this.http.get<IPlugin[]>(this.pluginBaseUrl);
+  }
+
+  getPlugin(id: string): Observable<IPlugin> {
+    return this.http.get<IPlugin>(this.pluginBaseUrl + '/' + id);
+  }
 
     getCustomersPage(page: number, pageSize: number): Observable<IPagedResults<ICustomer[]>> {
         return this.http.get<ICustomer[]>(
@@ -101,6 +175,20 @@ export class DataService {
         }
         return Observable.throw(error || 'Node.js server error');
     }
+
+  private handleUniApiError(
+    response: IUniApiResponse<any>,
+    defaultErrorMessage?: string,
+    entityForm?: FormGroup
+  ) {
+    if (entityForm) {
+      entityForm.setErrors(response.error);
+    }
+    this.growler.growl(
+      response.errorMessage || defaultErrorMessage || 'API responded with errors',
+      GrowlerMessageType.Danger
+    );
+  }
 
     calculateCustomersOrderTotal(customers: ICustomer[]) {
         for (let customer of customers) {

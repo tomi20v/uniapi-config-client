@@ -51,7 +51,7 @@ var EntitiesCardComponent = (function () {
     EntitiesCardComponent.prototype.ngOnInit = function () {
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
         __metadata("design:type", Array)
     ], EntitiesCardComponent.prototype, "entities", void 0);
     EntitiesCardComponent = __decorate([
@@ -93,7 +93,7 @@ var EntitiesRoutingModule = (function () {
     function EntitiesRoutingModule() {
     }
     EntitiesRoutingModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
             imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["d" /* RouterModule */].forChild(routes)],
             exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["d" /* RouterModule */]]
         })
@@ -185,7 +185,7 @@ var EntitiesModule = (function () {
     function EntitiesModule() {
     }
     EntitiesModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
             imports: [
                 __WEBPACK_IMPORTED_MODULE_1__shared_shared_module__["a" /* SharedModule */],
                 __WEBPACK_IMPORTED_MODULE_2__entities_routing_module__["a" /* EntitiesRoutingModule */]

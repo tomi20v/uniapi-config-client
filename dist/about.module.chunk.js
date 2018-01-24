@@ -25,7 +25,7 @@ var AboutRoutingModule = (function () {
     }
     AboutRoutingModule.components = [__WEBPACK_IMPORTED_MODULE_2__about_component__["a" /* AboutComponent */]];
     AboutRoutingModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
             imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["d" /* RouterModule */].forChild(routes)],
             exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["d" /* RouterModule */]]
         })
@@ -40,7 +40,7 @@ var AboutRoutingModule = (function () {
 /***/ "../../../../../src/app/about/about.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"view\">\n    <div class=\"container\">\n        <header>\n            <h3><span class=\"glyphicon glyphicon-info-sign\"></span> About</h3>\n        </header>\n        <br />\n        <div class=\"container\">\n            <div class=\"row\">\n                <div class=\"col-md-2\">Created by:</div>\n                <div class=\"col-md-10\"><a href=\"http://twitter.com/DanWahlin\" target=\"_blank\">Dan Wahlin</a></div>\n            </div>\n            <br />\n            <div class=\"row\">\n                <div class=\"col-md-2\">Blog:</div>\n                <div class=\"col-md-10\"><a href=\"http://blog.codewithdan.com\" target=\"_blank\">https://blog.codewithdan.com</a></div>\n            </div>\n            <br />\n            <div class=\"row\">\n                <div class=\"col-md-2\">GitHub:</div>\n                <div class=\"col-md-10\"><a href=\"https://github.com/DanWahlin/Angular-JumpStart\" target=\"_blank\">https://github.com/DanWahlin/Angular-JumpStart</a></div>\n            </div>\n            <br />\n            <div class=\"row\">\n                <div class=\"col-md-2\">Training:</div>\n                <div class=\"col-md-10\"><a href=\"mailto:training@codewithdan.com\" target=\"_blank\">Interested in hands-on AngularJS Training? Contact us for details.</a></div>\n            </div>\n        </div>\n    </div>\n</div>"
+module.exports = "<div class=\"view\">\n    <div class=\"container\">\n        <header>\n            <h3><span class=\"glyphicon glyphicon-info-sign\"></span> About</h3>\n        </header>\n        <br />\n        <div class=\"container\">\n            <div class=\"row\">\n                <div class=\"col-md-2\">What:</div>\n                <div class=\"col-md-10\">uniapi config client</div>\n            </div>\n            <br />\n            <div class=\"row\">\n                <div class=\"col-md-2\">Uniapi:</div>\n                <div class=\"col-md-10\"><a href=\"http://github.com/tomi20v/uniapi\" target=\"_blank\">uniapi on github</a></div>\n            </div>\n        </div>\n    </div>\n</div>\n"
 
 /***/ }),
 
@@ -99,7 +99,7 @@ var AboutModule = (function () {
     function AboutModule() {
     }
     AboutModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
             imports: [__WEBPACK_IMPORTED_MODULE_1__about_routing_module__["a" /* AboutRoutingModule */]],
             declarations: [__WEBPACK_IMPORTED_MODULE_1__about_routing_module__["a" /* AboutRoutingModule */].components]
         })

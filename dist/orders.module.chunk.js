@@ -25,7 +25,7 @@ var OrdersRoutingModule = (function () {
     }
     OrdersRoutingModule.components = [__WEBPACK_IMPORTED_MODULE_2__orders_component__["a" /* OrdersComponent */]];
     OrdersRoutingModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
             imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["d" /* RouterModule */].forChild(routes)],
             exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["d" /* RouterModule */]]
         })
@@ -121,7 +121,7 @@ var OrdersModule = (function () {
     function OrdersModule() {
     }
     OrdersModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
             imports: [__WEBPACK_IMPORTED_MODULE_1__shared_shared_module__["a" /* SharedModule */], __WEBPACK_IMPORTED_MODULE_2__orders_routing_module__["a" /* OrdersRoutingModule */]],
             declarations: [__WEBPACK_IMPORTED_MODULE_2__orders_routing_module__["a" /* OrdersRoutingModule */].components]
         })

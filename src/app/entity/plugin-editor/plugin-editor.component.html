@@ -1,0 +1,28 @@
+<div *ngIf="pluginId">
+  <span *ngIf="pluginIndex !== null" class="app-topline">
+    <div (click)="onRemoveFn()" class="app-input-action">
+      remove plugin
+      <i class="glyphicon glyphicon-remove"></i>
+    </div>
+    <span>editing</span>
+  </span>
+  <span *ngIf="pluginIndex === null" class="app-topline">
+    <div (click)="onRemoveFn()" class="app-input-action">
+      cancel
+      <i class="glyphicon glyphicon-remove"></i>
+    </div>
+    <span>adding new</span>
+  </span>
+  <div *ngIf="pluginSchema" [class.app-form-invalid]="!isValid">
+    <json-schema-form
+      *ngIf="pluginSchema"
+      framework="no-framework"
+      loadExternalAssets="true"
+      [schema]="pluginSchema"
+      [(data)]="pluginConfig"
+      (isValid)="isValidFn($event)"
+      (onSubmit)="onSubmitFn()"
+      ></json-schema-form>
+  </div>
+  <div *ngIf="!pluginSchema">loading schema...</div>
+</div>

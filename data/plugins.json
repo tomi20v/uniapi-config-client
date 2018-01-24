@@ -58,8 +58,11 @@
     },
     "required": [
       "pluginId",
+      "description",
       "onCreate",
+      "onCreateField",
       "onUpdate",
+      "onUpdateField",
       "format"
     ]
   }
