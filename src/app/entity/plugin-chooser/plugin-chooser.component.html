@@ -1,6 +1,6 @@
-<div class="app-topline">
-  <span>choose plugin to add</span>
-  <ul>
+<div class="app-input-row">
+  <label>choose plugin to add</label>
+  <ul class="app-chooser-list">
     <li *ngFor="let plugin of plugins"
       (click)="clicked(plugin.$id)">
       <b>{{plugin.$id}}</b>

@@ -1,15 +1,14 @@
-<div class="orders view">
+<div class="view">
   <div class="container">
     <div *ngIf="entity" class="app-content-left">
       <header>
         <h3>
-          <span *ngIf="hasChanges()" class="app-unsaved">has changes</span>
-          <span class="glyphicon glyphicon-info-sign"></span>
-          &nbsp;&nbsp;Entity editor
+          Entity editor
+          <label *ngIf="hasChanges()" class="app-unsaved-label">(has changes)</label>
         </h3>
       </header>
       <form [formGroup]="entityForm" class="app-column">
-        <div class="app-input-row-huge">
+        <div class="app-input-row">
           <label>Name</label>
           <input formControlName="name">
         </div>

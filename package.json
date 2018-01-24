@@ -1,6 +1,6 @@
 {
   "name": "uniapi-config-client",
-  "version": "0.0.3",
+  "version": "0.0.7",
   "license": "WTFPL",
   "scripts": {
     "ng": "ng",
@@ -12,9 +12,7 @@
     "playground": "angular-playground"
   },
   "private": true,
-  "dependencies": {
-    "@angular/flex-layout": "^2.0.0-beta.12"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@angular-devkit/core": "0.0.28",
     "@angular/animations": "~5.1.0",
@@ -24,6 +22,7 @@
     "@angular/compiler": "~5.1.0",
     "@angular/compiler-cli": "~5.1.0",
     "@angular/core": "~5.1.0",
+    "@angular/flex-layout": "^2.0.0-beta.12",
     "@angular/forms": "~5.1.0",
     "@angular/http": "~5.1.0",
     "@angular/language-service": "~5.1.0",

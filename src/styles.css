@@ -8,6 +8,12 @@
     float: left;
     width: 83.3%;
 }
+.app-content-left .app-unsaved-label {
+    color: red;
+    font-size: 40%;
+    top: -8px;
+    position: relative;
+}
 .app-input-row,
     .app-input-row-huge,
     .app-input-row-half,
@@ -107,6 +113,11 @@ select-widget-widget input.ng-invalid:after,
 select-widget-widget select.ng-invalid:after {
     color: red;
     content: "*";
+}
+.app-input-row .app-chooser-list {
+    width: 100%;
+    padding-left: 25px;
+    clear: both;
 }
 .app-form-invalid submit-widget input {
     background-color: lightgray;
